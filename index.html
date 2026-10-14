@@ -5112,7 +5112,7 @@ applyFilters();
      Format 'JJJJ-MM-TT HH:MM' (24 h), z. B. '2026-12-31 18:30'. Nur Datum ('2026-12-31') = 00:00 Uhr.
      Zeit = Ortszeit des Besuchers. Ab diesem Moment wird der Phoebe-Tab entfernt, auch live,
      wenn die Seite zu dem Zeitpunkt gerade offen ist. null = nie entfernen. */
-  var ENDS_AT='2026-11-02 00:00';
+  var ENDS_AT='2000-01-01 00:00'; /* DEAKTIVIERT: Tab wird sofort entfernt. Zum Reaktivieren wieder '2026-11-02 00:00' (oder null) eintragen. */
 
   var gone=false;
   function parseEnd(v){if(!v)return NaN;var m=String(v).trim().replace(' ','T');if(m.length===10)m+='T00:00';return new Date(m).getTime();}
