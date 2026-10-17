@@ -1563,6 +1563,16 @@
   .ph-reset{ appearance:none; background:var(--panel-2); border:1px solid var(--line); color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:11px; padding:8px 12px; border-radius:999px; cursor:pointer; }
   .ph-reset:hover{ color:var(--weapon); border-color:var(--weapon-dim); }
 </style>
+<script>
+/* Phoebe-Tracker: Ablaufzeitpunkt zentral. Format 'JJJJ-MM-TT HH:MM' (Ortszeit), null = nie entfernen.
+   Wird hier im <head> geprüft, damit der Tab beim Laden gar nicht erst sichtbar wird. */
+window.__PH_ENDS_AT='2000-01-01 00:00'; /* DEAKTIVIERT. Zum Reaktivieren z. B. '2026-11-02 00:00' oder null eintragen. */
+(function(){var v=window.__PH_ENDS_AT;if(!v)return;var m=String(v).trim().replace(' ','T');if(m.length===10)m+='T00:00';
+var t=new Date(m).getTime();if(!isNaN(t)&&Date.now()>=t)document.documentElement.classList.add('ph-off');})();
+</script>
+<style>
+  html.ph-off .main-tabs .tabs button[data-tab="phoebe"], html.ph-off #viewPhoebe{ display:none !important; }
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -5102,7 +5112,7 @@ applyFilters();
   }));
   document.querySelectorAll('.lang-switch button').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{if(document.body.classList.contains('tab-knowhow'))render();},0)));
 
-  let start='db'; try{const v=localStorage.getItem(TABKEY);start=(v==='knowhow'||v==='phoebe'||v==='exotic')?v:'db';}catch(e){}
+  let start='db'; try{const v=localStorage.getItem(TABKEY);start=(v==='knowhow'||(v==='phoebe'&&!document.documentElement.classList.contains('ph-off'))||v==='exotic')?v:'db';}catch(e){}
   render(); setTab(start); window.scrollTo({top:0});
 })();
 </script>
@@ -5118,7 +5128,7 @@ applyFilters();
      Format 'JJJJ-MM-TT HH:MM' (24 h), z. B. '2026-12-31 18:30'. Nur Datum ('2026-12-31') = 00:00 Uhr.
      Zeit = Ortszeit des Besuchers. Ab diesem Moment wird der Phoebe-Tab entfernt, auch live,
      wenn die Seite zu dem Zeitpunkt gerade offen ist. null = nie entfernen. */
-  var ENDS_AT='2000-01-01 00:00'; /* DEAKTIVIERT: Tab wird sofort entfernt. Zum Reaktivieren wieder '2026-11-02 00:00' (oder null) eintragen. */
+  var ENDS_AT=window.__PH_ENDS_AT; /* Wert wird oben im <head> eingestellt */
 
   var gone=false;
   function parseEnd(v){if(!v)return NaN;var m=String(v).trim().replace(' ','T');if(m.length===10)m+='T00:00';return new Date(m).getTime();}
