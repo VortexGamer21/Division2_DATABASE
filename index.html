@@ -1615,6 +1615,9 @@
   .bt-card.has::before{ background:var(--brand-dim); }
   .bt-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin:0 0 14px; }
   .bt-card h3{ font-family:'Oswald',sans-serif; font-weight:600; font-size:20px; color:#fff; margin:0; }
+  .bt-info{ margin:-8px 0 14px; display:flex; flex-direction:column; gap:3px; font-size:13px; line-height:1.4; color:var(--text-dim); }
+  .bt-info b{ color:var(--gold); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:11px; margin-right:6px; }
+  .bt-info span.v{ color:#fff; }
   .bt-sum{ font-family:'Oswald',sans-serif; font-weight:600; font-size:15px; color:var(--text-dim); border:1px solid var(--line); border-radius:999px; padding:2px 11px; background:var(--panel-2); }
   .bt-card.has .bt-sum{ color:var(--gold); border-color:var(--brand-dim); }
   .bt-row{ display:flex; align-items:center; gap:8px; padding:6px 0; border-top:1px solid var(--line-soft); }
@@ -5389,6 +5392,14 @@ applyFilters();
   if(!isNaN(endMs)&&Date.now()>=endMs){off=true;}
 
   var NAMES=["Blinding The Eye","Final Girl","Binding Circle","Rubber and Glue","Scarecrow","Dousing the Light"];
+  var INFO={
+    "Blinding The Eye":{boss:"The Burning Eye",exotic:"Eagle Bearer"},
+    "Final Girl":{boss:"The Carver",exotic:"Regulus"},
+    "Binding Circle":{boss:"The Bound",exotic:"Steel & Sons"},
+    "Rubber and Glue":{boss:"The Mocker",exotic:"Vindicator"},
+    "Scarecrow":{boss:"The Raven",exotic:"Prima Donna"},
+    "Dousing the Light":{boss:"The Fool's Light",exotic:"The Bighorn"}
+  };
   var DIFFS=[
     {id:"normal",de:"Normal",en:"Normal",color:"#8FA3B5"},
     {id:"hard",de:"Hart",en:"Hard",color:"#35B6C9"},
@@ -5443,6 +5454,17 @@ applyFilters();
       var h=document.createElement("h3");h.textContent=n;
       var sm=document.createElement("span");sm.className="bt-sum";sm.textContent=sum;
       top.appendChild(h);top.appendChild(sm);c.appendChild(top);
+      var inf=INFO[n];
+      if(inf){
+        var io=document.createElement("div");io.className="bt-info";
+        [[L==='en'?'Boss':'Boss',inf.boss],[L==='en'?'Exotic':'Exotic',inf.exotic]].forEach(function(p){
+          var li=document.createElement("div");
+          var b=document.createElement("b");b.textContent=p[0];
+          var v=document.createElement("span");v.className="v";v.textContent=p[1];
+          li.appendChild(b);li.appendChild(v);io.appendChild(li);
+        });
+        c.appendChild(io);
+      }
       DIFFS.forEach(function(d){
         var v=counts[n][d.id];perDiff[d.id]+=v;
         var r=document.createElement("div");r.className="bt-row"+(v>0?" active":"");
