@@ -1476,6 +1476,7 @@
   .main-tabs .tabs{ flex-wrap:wrap; }
   .main-tabs .tabs button[data-tab="phoebe"].active{ background: rgba(201,67,46,.14); color: var(--weapon); box-shadow: 0 0 0 1px var(--weapon-dim) inset; }
   body.tab-phoebe .main-tabs .kh-lang{ display:flex; }
+  body.tab-bounty .main-tabs .kh-lang{ display:flex; }
   @media (max-width:560px){ .main-tabs .tabs button{ padding:9px 13px; font-size:12.5px; } }
 
   #viewPhoebe{ display:none; }
@@ -1562,6 +1563,86 @@
   .ph-calc{ font-size:12px; color:var(--text-faint); line-height:1.7; margin:12px 0 0; }
   .ph-reset{ appearance:none; background:var(--panel-2); border:1px solid var(--line); color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:11px; padding:8px 12px; border-radius:999px; cursor:pointer; }
   .ph-reset:hover{ color:var(--weapon); border-color:var(--weapon-dim); }
+
+  /* ================= BOUNTY TRACKER ================= */
+  #viewBounty{ display:none; }
+  body.tab-bounty #viewBounty{ display:block; }
+  body.tab-bounty #viewDb{ display:none; }
+  .main-tabs .tabs button[data-tab="bounty"].active{ background: rgba(232,137,27,.14); color: var(--gear); box-shadow: 0 0 0 1px var(--gear-dim) inset; }
+  #viewBounty{ --d-normal:#8FA3B5; --d-hard:#35B6C9; --d-chal:#E8C24A; --d-hero:#E0533C; }
+  .bt-hero{ padding:40px 0 30px; border-bottom:1px solid var(--line-soft); }
+  .bt-hero .kicker{
+    display:inline-flex; align-items:center; gap:9px; font-size:11px; color:var(--gear);
+    letter-spacing:.14em; padding:7px 13px; border:1px solid var(--gear-dim);
+    border-radius:3px 3px 3px 0; background:rgba(232,137,27,.08); margin-bottom:18px;
+  }
+  .bt-hero .kicker::before{ content:''; width:6px; height:6px; background:var(--gear); border-radius:1px; transform:rotate(45deg); display:inline-block; }
+  .bt-hero h1{ font-size:clamp(30px,5vw,48px); line-height:1.05; margin:0 0 12px; color:#fff; }
+  .bt-hero h1 span{ color:var(--gear); }
+  .bt-hero p{ max-width:620px; color:var(--text-dim); font-size:13.5px; line-height:1.7; margin:0 0 26px; }
+  .bt-stats{ display:flex; gap:12px; flex-wrap:wrap; }
+  .bt-stat{ background:var(--panel); border:1px solid var(--line-soft); border-top:3px solid var(--gear); border-radius:var(--radius-sm); padding:12px 18px 11px; min-width:118px; }
+  .bt-stat .num{ font-family:'Oswald',sans-serif; font-size:30px; font-weight:600; color:#fff; line-height:1; }
+  .bt-stat .lbl{ font-size:10.5px; color:var(--text-faint); margin-top:6px; letter-spacing:.07em; text-transform:uppercase; }
+  .bt-stat.total{ border-top-color:var(--gold); }
+  .bt-stat.total .num{ color:var(--gold); font-size:38px; }
+  .bt-stat.d-normal{ border-top-color:var(--d-normal); }
+  .bt-stat.d-hard{ border-top-color:var(--d-hard); }
+  .bt-stat.d-chal{ border-top-color:var(--d-chal); }
+  .bt-stat.d-hero{ border-top-color:var(--d-hero); }
+  .bt-head{ display:flex; align-items:center; gap:14px; margin:38px 0 20px; }
+  .bt-head h2{ font-size:22px; margin:0; color:#fff; display:flex; align-items:center; gap:12px; }
+  .bt-head h2::before{ content:''; width:9px; height:9px; background:var(--gear); border-radius:2px; transform:rotate(45deg); flex:0 0 auto; }
+  .bt-head .rule{ flex:1; height:0; border-top:1px dashed var(--line-soft); }
+  .bt-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; }
+  .bt-card{
+    background:linear-gradient(175deg,var(--panel-2),var(--panel) 60%);
+    border:1px solid var(--line-soft); border-radius:var(--radius);
+    padding:20px 20px 16px 38px; position:relative;
+    box-shadow:0 14px 26px -20px rgba(0,0,0,.7);
+    transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;
+  }
+  .bt-card:hover{ transform:translateY(-2px); border-color:var(--gear-dim); box-shadow:0 18px 30px -18px rgba(232,137,27,.22); }
+  .bt-card::before{
+    content:'BOUNTY'; position:absolute; left:0; top:0; bottom:0; width:22px;
+    background:var(--gear-dim); color:rgba(0,0,0,.5);
+    display:flex; align-items:center; justify-content:center;
+    writing-mode:vertical-rl; transform:rotate(180deg);
+    font-family:'Oswald',sans-serif; font-weight:600; font-size:10px; letter-spacing:.18em;
+    border-radius:0 var(--radius) var(--radius) 0;
+  }
+  .bt-card.has{ border-color:var(--brand-dim); }
+  .bt-card.has::before{ background:var(--brand-dim); }
+  .bt-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin:0 0 14px; }
+  .bt-card h3{ font-family:'Oswald',sans-serif; font-weight:600; font-size:20px; color:#fff; margin:0; }
+  .bt-sum{ font-family:'Oswald',sans-serif; font-weight:600; font-size:15px; color:var(--text-dim); border:1px solid var(--line); border-radius:999px; padding:2px 11px; background:var(--panel-2); }
+  .bt-card.has .bt-sum{ color:var(--gold); border-color:var(--brand-dim); }
+  .bt-row{ display:flex; align-items:center; gap:8px; padding:6px 0; border-top:1px solid var(--line-soft); }
+  .bt-row:first-of-type{ border-top:none; }
+  .bt-dlbl{ flex:0 0 112px; font-size:11px; letter-spacing:.06em; text-transform:uppercase; display:flex; align-items:center; gap:8px; color:var(--text-dim); }
+  .bt-dlbl::before{ content:''; width:8px; height:8px; border-radius:2px; background:var(--dc); transform:rotate(45deg); flex:0 0 auto; }
+  .bt-row.active .bt-dlbl{ color:var(--dc); }
+  .bt-row button{
+    appearance:none; background:var(--panel-2); color:var(--text); border:1px solid var(--line);
+    border-radius:999px; width:34px; height:34px; font-family:'JetBrains Mono',monospace; font-size:17px; cursor:pointer;
+    transition:all .15s ease; flex:0 0 auto;
+  }
+  .bt-row button:hover{ border-color:var(--dc); color:var(--dc); background:rgba(255,255,255,.05); }
+  .bt-row button:active{ transform:scale(.94); }
+  .bt-cnt{
+    flex:1; min-width:0; text-align:center; background:var(--panel-2); border:1px solid var(--line); color:#fff;
+    border-radius:999px; font-family:'Oswald',sans-serif; font-size:19px; font-weight:600; padding:3px 8px; outline:none;
+    transition:border-color .15s ease,box-shadow .15s ease;
+  }
+  .bt-row.active .bt-cnt{ border-color:var(--dc); }
+  .bt-cnt:focus{ border-color:var(--dc); box-shadow:0 0 0 3px rgba(255,255,255,.08); }
+  .bt-foot{ margin-top:30px; }
+  .bt-reset{
+    appearance:none; background:transparent; border:1px solid var(--line); border-radius:999px; color:var(--text-dim);
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.02em; padding:9px 16px; cursor:pointer; transition:all .15s ease;
+  }
+  .bt-reset:hover{ color:var(--weapon); border-color:var(--weapon-dim); background:rgba(201,67,46,.14); }
+  @media (max-width:560px){ .bt-grid{ grid-template-columns:1fr; } }
 </style>
 <script>
 /* Phoebe-Tracker: Ablaufzeitpunkt zentral. Format 'JJJJ-MM-TT HH:MM' (Ortszeit), null = nie entfernen.
@@ -1570,8 +1651,17 @@ window.__PH_ENDS_AT='2000-01-01 00:00'; /* DEAKTIVIERT. Zum Reaktivieren z. B. '
 (function(){var v=window.__PH_ENDS_AT;if(!v)return;var m=String(v).trim().replace(' ','T');if(m.length===10)m+='T00:00';
 var t=new Date(m).getTime();if(!isNaN(t)&&Date.now()>=t)document.documentElement.classList.add('ph-off');})();
 </script>
+<script>
+/* Bounty-Tracker: Abschaltzeitpunkt zentral. Format 'JJJJ-MM-TT HH:MM' (Ortszeit), null = nie abschalten.
+   Wird hier im <head> geprüft, damit der Tab beim Laden/Aktualisieren gar nicht erst sichtbar wird.
+   Der Tracker bleibt im Code erhalten. Zum Reaktivieren: Datum in die Zukunft setzen oder null eintragen. */
+window.__BT_ENDS_AT='2026-11-02 00:00';
+(function(){var v=window.__BT_ENDS_AT;if(!v)return;var m=String(v).trim().replace(' ','T');if(m.length===10)m+='T00:00';
+var t=new Date(m).getTime();if(!isNaN(t)&&Date.now()>=t)document.documentElement.classList.add('bt-off');})();
+</script>
 <style>
   html.ph-off .main-tabs .tabs button[data-tab="phoebe"], html.ph-off #viewPhoebe{ display:none !important; }
+  html.bt-off .main-tabs .tabs button[data-tab="bounty"], html.bt-off #viewBounty{ display:none !important; }
 </style>
 </head>
 <body>
@@ -1581,6 +1671,7 @@ var t=new Date(m).getTime();if(!isNaN(t)&&Date.now()>=t)document.documentElement
 <button class="active" data-tab="db" role="tab" type="button">Datenbank</button>
 <button data-tab="knowhow" role="tab" type="button">Know-how Tracker</button>
 <button data-tab="phoebe" role="tab" type="button">Phoebe-Tracker</button>
+<button data-tab="bounty" role="tab" type="button">Bounty-Tracker</button>
 <button data-tab="exotic" role="tab" type="button">Exotic Collector</button>
 </div>
 <div class="kh-lang" role="group" aria-label="Language">
@@ -2136,6 +2227,24 @@ var t=new Date(m).getTime();if(!isNaN(t)&&Date.now()>=t)document.documentElement
 </div>
 </details>
 <div class="kh-note" id="phNote"></div>
+</div>
+<div id="viewBounty">
+<header class="bt-hero">
+<div class="kicker" id="btKicker"></div>
+<h1 id="btTitle"></h1>
+<p id="btLede"></p>
+<div class="bt-stats">
+<div class="bt-stat total"><div class="num" id="btTotal">0</div><div class="lbl" id="btLblTotal"></div></div>
+<div class="bt-stat"><div class="num" id="btKinds">0</div><div class="lbl" id="btLblKinds"></div></div>
+<div class="bt-stat d-normal"><div class="num" id="btT-normal">0</div><div class="lbl" data-d="normal"></div></div>
+<div class="bt-stat d-hard"><div class="num" id="btT-hard">0</div><div class="lbl" data-d="hard"></div></div>
+<div class="bt-stat d-chal"><div class="num" id="btT-chal">0</div><div class="lbl" data-d="chal"></div></div>
+<div class="bt-stat d-hero"><div class="num" id="btT-hero">0</div><div class="lbl" data-d="hero"></div></div>
+</div>
+</header>
+<div class="bt-head"><h2 id="btHead"></h2><div class="rule"></div></div>
+<div class="bt-grid" id="btList"></div>
+<div class="bt-foot"><button class="bt-reset" id="btReset" type="button"></button></div>
 </div>
 <div class="kh-toast" id="khToast"></div>
 <footer>
@@ -4033,7 +4142,7 @@ applyFilters();
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{
     acceptNode(node){
       const p=node.parentElement;
-      if(!p || p.closest('.lang-switch,.esc-section,.proto-section,#viewExotic,#namedGearGrid,script,style')) return NodeFilter.FILTER_REJECT;
+      if(!p || p.closest('.lang-switch,.esc-section,.proto-section,#viewExotic,#viewBounty,#namedGearGrid,script,style')) return NodeFilter.FILTER_REJECT;
       if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       return NodeFilter.FILTER_ACCEPT;
     }
@@ -5098,6 +5207,7 @@ applyFilters();
   function setTab(tab){
     document.body.classList.toggle('tab-knowhow',tab==='knowhow');
     document.body.classList.toggle('tab-phoebe',tab==='phoebe');
+    document.body.classList.toggle('tab-bounty',tab==='bounty');
     document.body.classList.toggle('tab-exotic',tab==='exotic');
     document.querySelectorAll('.main-tabs .tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
     try{localStorage.setItem(TABKEY,tab);}catch(e){}
@@ -5112,7 +5222,7 @@ applyFilters();
   }));
   document.querySelectorAll('.lang-switch button').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{if(document.body.classList.contains('tab-knowhow'))render();},0)));
 
-  let start='db'; try{const v=localStorage.getItem(TABKEY);start=(v==='knowhow'||(v==='phoebe'&&!document.documentElement.classList.contains('ph-off'))||v==='exotic')?v:'db';}catch(e){}
+  let start='db'; try{const v=localStorage.getItem(TABKEY);start=(v==='knowhow'||(v==='phoebe'&&!document.documentElement.classList.contains('ph-off'))||(v==='bounty'&&!document.documentElement.classList.contains('bt-off'))||v==='exotic')?v:'db';}catch(e){}
   render(); setTab(start); window.scrollTo({top:0});
 })();
 </script>
@@ -5254,6 +5364,115 @@ applyFilters();
   new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   render();setInterval(tick,1000);
   if(!isNaN(endMs)){var endIv=setInterval(function(){if(Date.now()>=endMs){clearInterval(endIv);removeTab();}},1000);}
+})();
+</script>
+<script>
+/* ==========================================================
+   BOUNTY TRACKER (Tab)
+   Sprache folgt dem DE/EN-Schalter der Seite (document.documentElement.lang).
+   Speicherung: localStorage (nur in diesem Browser), Schlüssel wie im Einzel-Tracker.
+   Abschaltzeit: window.__BT_ENDS_AT im <head>. Danach wird der Tab ausgeblendet (Code bleibt erhalten).
+   ========================================================== */
+(function(){
+  var ENDS_AT=window.__BT_ENDS_AT;
+  function parseEnd(v){if(!v)return NaN;var m=String(v).trim().replace(' ','T');if(m.length===10)m+='T00:00';return new Date(m).getTime();}
+  var endMs=parseEnd(ENDS_AT);
+  var off=false;
+  function switchOff(){
+    off=true;
+    document.documentElement.classList.add('bt-off');
+    if(document.body.classList.contains('tab-bounty')){
+      document.body.classList.remove('tab-bounty');
+      var dbBtn=document.querySelector('.main-tabs .tabs button[data-tab="db"]');if(dbBtn)dbBtn.click();
+    }
+  }
+  if(!isNaN(endMs)&&Date.now()>=endMs){off=true;}
+
+  var NAMES=["Blinding The Eye","Final Girl","Binding Circle","Rubber and Glue","Scarecrow","Dousing the Light"];
+  var DIFFS=[
+    {id:"normal",de:"Normal",en:"Normal",color:"#8FA3B5"},
+    {id:"hard",de:"Hart",en:"Hard",color:"#35B6C9"},
+    {id:"chal",de:"Herausfordernd",en:"Challenging",color:"#E8C24A"},
+    {id:"hero",de:"Heroisch",en:"Heroic",color:"#E0533C"}
+  ];
+  var TX={
+    de:{kicker:'TRACKER',t1:'Bounty',t2:'Tracker',lede:'Zähle mit, wie viele du von jedem Bounty hast – aufgeteilt nach Schwierigkeitsstufe. Der Gesamtzähler rechnet alles zusammen.',
+      total:'Gesamt',kinds:'Verschiedene Bounties',head:'Bounties',reset:'Alles zurücksetzen',confirm:'Wirklich alle Zähler auf 0 setzen?',minus:'minus',plus:'plus'},
+    en:{kicker:'TRACKER',t1:'Bounty',t2:'Tracker',lede:'Keep count of how many of each bounty you have, split by difficulty. The total adds everything up.',
+      total:'Total',kinds:'Different bounties',head:'Bounties',reset:'Reset everything',confirm:'Really reset all counters to 0?',minus:'minus',plus:'plus'}
+  };
+  var KEY="bounty-counts-v2", OLD_KEY="bounty-counts";
+  var counts={};
+  function emptyEntry(){var e={};DIFFS.forEach(function(d){e[d.id]=0});return e}
+  NAMES.forEach(function(n){counts[n]=emptyEntry()});
+  function num(v){return (typeof v==="number"&&v>0)?Math.floor(v):0}
+  try{
+    var st=localStorage.getItem(KEY);
+    if(st){
+      var p=JSON.parse(st);
+      NAMES.forEach(function(n){if(p&&p[n]){DIFFS.forEach(function(d){counts[n][d.id]=num(p[n][d.id])})}});
+    }else{
+      var o=localStorage.getItem(OLD_KEY);
+      if(o){var po=JSON.parse(o);NAMES.forEach(function(n){if(po&&typeof po[n]==="number")counts[n].normal=num(po[n])})}
+    }
+  }catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(counts))}catch(e){}}
+  function sumOf(n){var t=0;DIFFS.forEach(function(d){t+=counts[n][d.id]});return t}
+  var $=function(id){return document.getElementById(id)};
+  var lang=function(){return document.documentElement.lang==='en'?'en':'de'};
+
+  function render(){
+    if(off)return;
+    var L=lang(), T=TX[L];
+    $('btKicker').textContent=T.kicker;
+    $('btTitle').innerHTML=T.t1+' <span>'+T.t2+'</span>';
+    $('btLede').textContent=T.lede;
+    $('btLblTotal').textContent=T.total;
+    $('btLblKinds').textContent=T.kinds;
+    $('btHead').textContent=T.head;
+    $('btReset').textContent=T.reset;
+    document.querySelectorAll('#viewBounty .bt-stat .lbl[data-d]').forEach(function(el){
+      var d=DIFFS.filter(function(x){return x.id===el.dataset.d})[0];el.textContent=d[L];
+    });
+    var t=0,k=0,perDiff={normal:0,hard:0,chal:0,hero:0};
+    var list=$('btList');list.innerHTML="";
+    NAMES.forEach(function(n){
+      var sum=sumOf(n);t+=sum;if(sum>0)k++;
+      var c=document.createElement("div");c.className="bt-card"+(sum>0?" has":"");
+      var top=document.createElement("div");top.className="bt-top";
+      var h=document.createElement("h3");h.textContent=n;
+      var sm=document.createElement("span");sm.className="bt-sum";sm.textContent=sum;
+      top.appendChild(h);top.appendChild(sm);c.appendChild(top);
+      DIFFS.forEach(function(d){
+        var v=counts[n][d.id];perDiff[d.id]+=v;
+        var r=document.createElement("div");r.className="bt-row"+(v>0?" active":"");
+        r.style.setProperty("--dc",d.color);
+        var lb=document.createElement("div");lb.className="bt-dlbl";lb.textContent=d[L];
+        var m=document.createElement("button");m.type="button";m.textContent="\u2212";m.setAttribute("aria-label",n+" "+d[L]+" "+T.minus);
+        var i=document.createElement("input");i.className="bt-cnt";i.type="number";i.min="0";i.inputMode="numeric";i.value=v;
+        i.setAttribute("aria-label",n+" "+d[L]);
+        var pl=document.createElement("button");pl.type="button";pl.textContent="+";pl.setAttribute("aria-label",n+" "+d[L]+" "+T.plus);
+        m.onclick=function(){counts[n][d.id]=Math.max(0,counts[n][d.id]-1);save();render()};
+        pl.onclick=function(){counts[n][d.id]++;save();render()};
+        i.onchange=function(){counts[n][d.id]=Math.max(0,parseInt(i.value,10)||0);save();render()};
+        r.appendChild(lb);r.appendChild(m);r.appendChild(i);r.appendChild(pl);c.appendChild(r);
+      });
+      list.appendChild(c);
+    });
+    $('btTotal').textContent=t;
+    $('btKinds').textContent=k;
+    $('btT-normal').textContent=perDiff.normal;
+    $('btT-hard').textContent=perDiff.hard;
+    $('btT-chal').textContent=perDiff.chal;
+    $('btT-hero').textContent=perDiff.hero;
+    document.querySelectorAll('.kh-lang button').forEach(function(b){b.classList.toggle('active',b.dataset.l===L)});
+  }
+  $('btReset').onclick=function(){
+    if(confirm(TX[lang()].confirm)){NAMES.forEach(function(n){counts[n]=emptyEntry()});save();render()}
+  };
+  new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  render();
+  if(!off&&!isNaN(endMs)){var iv=setInterval(function(){if(Date.now()>=endMs){clearInterval(iv);switchOff();}},1000);}
 })();
 </script>
 </body>
