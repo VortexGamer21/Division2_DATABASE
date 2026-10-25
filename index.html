@@ -779,6 +779,8 @@
     color: var(--text-faint);
     font-style: italic;
   }
+  .witem .wtalent-free summary{ color: var(--text-faint); font-style: italic; }
+  .witem .wtalent-free summary:hover{ color: var(--text); }
   @media (prefers-reduced-motion: reduce){
     .witem .wtalent summary::before{ transition: none; }
   }
@@ -3273,10 +3275,24 @@ function escHTML(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+const noFixedTalentText = {
+  de: 'Diese Named-Waffe hat kein festes Talent. Das Talent lässt sich frei modden – wähle einfach das Talent, das du für dein Build brauchst.',
+  en: 'This named weapon has no fixed talent. The talent can be modded freely – simply pick the talent your build needs.'
+};
+
 function talentBlock(name, rarity){
   if(rarity !== 'exotic' && rarity !== 'named') return '';
   const list = exoticTalents[name];
-  if(!list || !list.length) return '';
+  if(!list || !list.length){
+    if(rarity !== 'named') return '';
+    return `
+    <details class="wtalent wtalent-free" data-no-fixed-talent>
+      <summary>No fixed talent</summary>
+      <div class="tbody">
+        <p class="ttext">${noFixedTalentText.de}</p>
+      </div>
+    </details>`;
+  }
   const names = list.map(t => t[0]).filter(Boolean);
   const label = names.length
     ? `Talent: <b>${names.map(escHTML).join(' · ')}</b>`
@@ -4520,6 +4536,11 @@ applyFilters();
           <p class="ttext">${escHTML(t[1])}</p>
           ${t[2]?`<p class="tnote">${escHTML(t[2])}</p>`:''}
         </div>`).join('');
+    });
+
+    document.querySelectorAll('.wtalent[data-no-fixed-talent]').forEach(details=>{
+      const p=details.querySelector('.ttext');
+      if(p) p.textContent = english ? noFixedTalentText.en : noFixedTalentText.de;
     });
 
     /* Sources panel: use complete DE/EN text so no mixed-language fragments remain. */
