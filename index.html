@@ -749,6 +749,9 @@
   }
   .witem .wtalent[open] summary::before{ transform: translateY(-1px) rotate(90deg); }
   .witem .wtalent summary b{ color: var(--weapon); font-weight: 600; }
+  .witem.named .wtalent summary::before{ border-left-color: var(--gold); }
+  .witem.named .wtalent summary b{ color: var(--gold); }
+  .witem.named .wtalent summary:focus-visible{ outline-color: var(--gold); }
   .witem .wtalent summary:hover{ color: var(--text); }
   .witem .wtalent summary:focus-visible{
     outline: 1px solid var(--weapon);
@@ -2995,10 +2998,276 @@ const exoticTalents = {
   ],
   "Lichtenberg": [
     ["Run and Gun", "PvE: Während du dich bewegst, sammelst du 5 Stacks pro Sekunde (max. 100). Kopftreffer mit der Lichtenberg geben 15 Stacks und 5 Sekunden lang +20 % Bewegungsgeschwindigkeit. Bei maximalen Stacks verbraucht dein nächster Schuss mit der Lichtenberg alle Stacks, verursacht 200 % Bonusschaden und schockt das Ziel 2 Sekunden lang. PvP: Während du dich bewegst, sammelst du 5 Stacks pro Sekunde (max. 100). Kopftreffer mit der Lichtenberg geben 10 Stacks und 3 Sekunden lang +10 % Bewegungsgeschwindigkeit. Bei maximalen Stacks verbraucht dein nächster Schuss mit der Lichtenberg alle Stacks, verursacht 70 % Bonusschaden und schockt das Ziel 1 Sekunde lang."]
-  ]
+  ],
+
+  /* --- Named Weapons (Talent ausklappbar) --- */
+  "Shield Splinterer": [
+    ["Perfect Optimist", "Waffenschaden steigt um +4,5 % für je 10 % fehlende Munition im Magazin."]
+  ],
+  "Huntsman": [
+    ["Perfect Frenzy", "Für je 8 Kugeln Magazinkapazität gibt es +3 % Feuerrate und +3 % Waffenschaden für 9 Sekunden, wenn du aus leerem Magazin nachlädst."]
+  ],
+  "Caretaker": [
+    ["Perfect Killer", "Ein Kill mit einem kritischen Treffer gewährt +90 % kritischen Trefferschaden für 10 Sekunden."]
+  ],
+  "Savage Wolverine": [
+    ["Perfectly Close & Personal", "Ein Kill innerhalb von 7 m gewährt +38 % Waffenschaden für 10 Sekunden."]
+  ],
+  "Kingbreaker": [
+    ["Perfect Flatline", "+20 % Waffenschaden gegen gepulste Gegner. Nach 3 Kills wird der nächste getroffene Gegner gepulst."]
+  ],
+  "Mechanical Animal": [
+    ["Future Perfection", "Waffen-Kills geben +1 Skill-Stufe für 19 Sekunden (bis zu 4x stapelbar). Waffen-Kills auf Skill-Stufe 6 gewähren Overcharge für 15 Sekunden (Abklingzeit Overcharge: 90 Sekunden)."]
+  ],
+  "Test Subject": [
+    ["Perfectly In Sync", "Einen Gegner zu treffen gibt +20 % Skillschaden für 5 s. Einen Nicht-Schild-Skill einzusetzen oder einen Gegner mit einem Skill zu treffen gibt +20 % Waffenschaden für 5 s. Sind beide Boni gleichzeitig aktiv, werden die Schadenssteigerungen verdoppelt."]
+  ],
+  "The Railsplitter": [
+    ["Perfectly Accurate", "+80 % Genauigkeit."]
+  ],
+  "Invisible Hand": [
+    ["Perfect Allegro", "+15 % Feuerrate."]
+  ],
+  "Manic": [
+    ["Perfectly Overflowing", "Alle 2 Nachladevorgänge aus leerem Magazin erhöhen deine Basis-Magazinkapazität um +100 %."]
+  ],
+  "Lud": [
+    ["Perfect Streamline", "+47 % Waffenschaden, solange keiner deiner Skills auf Abklingzeit ist."]
+  ],
+  "Steamer": [
+    ["Perfect Boiling Point", "Die ersten 48 % des Magazins haben -100 % Chance auf kritische Treffer. Der Rest des Magazins hat 100 % Krit-Chance."]
+  ],
+  "The Archivist": [
+    ["Perfect Ranger", "Verstärkt den Waffenschaden um 2 % für alle 3 m, die du vom Ziel entfernt bist."]
+  ],
+  "First Bloom": [
+    ["Blossom Harvest", "Verstärkt den Waffenschaden um 3,3 % für jede 10 % kombinierter Rüstung und Gesundheit, die der Gegner noch hat."]
+  ],
+  "Born Great": [
+    ["Perfect Stabilize", "Jeder Schuss erhöht Genauigkeit um +1 % und Stabilität um +1 % (bis max. 75 %). Hörst du auf zu schießen, setzen sich die Boni nach 6 Sekunden zurück."]
+  ],
+  "The Drill": [
+    ["Perfect Precision Strike", "Kills auf Gegner weiter als 20 m bauen Stacks auf (max. 2). Ein Treffer auf einen Gegner innerhalb von 20 m verbraucht alle Stacks und gewährt +35 % verstärkten Schaden gegen Gegner innerhalb von 20 m für 5 Sekunden."]
+  ],
+  "Glory Daze": [
+    ["Perfectly Near Sighted", "+100 % Stabilität auf Kosten von -35 % optimaler Reichweite."]
+  ],
+  "Pyromaniac": [
+    ["Perfectly Ignited", "+30 % Waffenschaden gegen brennende Gegner. Nach 3 Kills wird der nächste getroffene Gegner in Brand gesetzt."]
+  ],
+  "Burn Out": [
+    ["Perfectly On Empty", "Nachladen aus leerem Magazin gewährt +80 % Waffenhandhabung für 10 Sekunden."]
+  ],
+  "Goalie": [
+    ["Perfect Pressure Point", "Verstärkt den Waffenschaden um 20 % gegen Gegner unter Statuseffekten."]
+  ],
+  "Baker's Dozen": [
+    ["Perfect Lucky Shot", "+30 % Magazinkapazität. Fehlschüsse aus der Deckung kehren zu 100 % ins Magazin zurück."]
+  ],
+  "Harmony": [
+    ["Perfectly In Sync", "Einen Gegner zu treffen gibt +20 % Skillschaden für 5 s. Einen Nicht-Schild-Skill einzusetzen oder einen Gegner mit einem Skill zu treffen gibt +20 % Waffenschaden für 5 s. Sind beide Boni gleichzeitig aktiv, werden die Schadenssteigerungen verdoppelt."]
+  ],
+  "Everlasting Gaze": [
+    ["Perfect Perpetuation", "Kopftreffer gewähren +75 % Statuseffekt-Schaden und -Dauer für den nächsten Statuseffekt, den du verursachst. Abklingzeit: 16 Sekunden."]
+  ],
+  "The Claw": [
+    ["Perfect Precision Strike", "Kills auf Gegner weiter als 20 m bauen Stacks auf (max. 2). Ein Treffer auf einen Gegner innerhalb von 20 m verbraucht alle Stacks und gewährt +35 % verstärkten Schaden gegen Gegner innerhalb von 20 m für 5 Sekunden."]
+  ],
+  "Teapot": [
+    ["Perfect Boiling Point", "Die ersten 48 % des Magazins haben -100 % Chance auf kritische Treffer. Der Rest des Magazins hat 100 % Krit-Chance."]
+  ],
+  "Whisper": [
+    ["Perfectly Behind You", "Verstärkt den Waffenschaden um +25 % gegen Gegner, die dich nicht anvisieren.", "Eine Quelle nennt für Whisper +20 %."]
+  ],
+  "The Virginian": [
+    ["Perfect Boomerang", "Kritische Treffer haben eine Chance von 75 %, die Kugel ins Magazin zurückzugeben. Wird eine Kugel zurückgegeben, verursacht der nächste Schuss +50 % Schaden."]
+  ],
+  "Surge": [
+    ["Perfect Spike", "Kopftreffer gewähren +25 % Skillschaden für 15 Sekunden."]
+  ],
+  "Trader": [
+    ["Perfect Back and Forth", "Zu dieser Waffe wechseln gibt +13 % Feuerrate und +12 % Waffenschaden für 10 s. Von dieser Waffe weg wechseln gibt +5 % Feuerrate und +4,5 % Waffenschaden für 10 s. Ein Bonus entfernt den jeweils anderen, falls noch aktiv. Zwei Instanzen des Talents funktionieren nicht gleichzeitig."]
+  ],
+  "Artist's Tool": [
+    ["Perfect Rifleman", "Kopftreffer geben einen Stack von +11 % Waffenschaden für 5 Sekunden (max. 6 Stacks). Weitere Kopftreffer erneuern die Dauer."]
+  ],
+  "Brain Break": [
+    ["Perfect Head Scratcher", "Verstärkt den Waffenschaden um 35 % gegen verwirrte Gegner. Nach 3 Kills wird der nächste getroffene Gegner verwirrt."]
+  ],
+  "Achilles": [
+    ["Perfect Soft Spot", "Das Zerstören eines Schwachpunkts gewährt +32 % Waffenschaden für 15 Sekunden."]
+  ],
+  "Stage Left": [
+    ["Perfect Sledgehammer", "Schaden mit einer Granate markiert das Ziel. Markierte Ziele erleiden 20 % mehr Schaden an der Rüstung durch den markierenden Agenten und haben -30 % Bewegungsgeschwindigkeit. Die Markierung hält 10 Sekunden."]
+  ],
+  "Dark Winter": [
+    ["Perfect Killer", "Ein Kill mit einem kritischen Treffer gewährt +90 % kritischen Trefferschaden für 10 Sekunden."]
+  ],
+  "Emeline's Guard": [
+    ["Perfect Preservation", "Ein Kill repariert 15 % Rüstung über 5 Sekunden. Kopfschuss-Kills verbessern die Reparatur um zusätzlich 15 %."]
+  ],
+  "Froth": [
+    ["Perfect Immobilize", "Verstärkt den Waffenschaden um 25 % gegen festgesetzte Gegner. Nach 3 Kills wird der nächste getroffene Gegner festgesetzt."]
+  ],
+  "The Grudge": [
+    ["Perfectly Vindictive", "Ein Kill an einem Gegner mit Statuseffekt gewährt dir und allen Verbündeten innerhalb von 20 m +21 % Chance auf kritische Treffer und +21 % kritischen Trefferschaden für 20 Sekunden."]
+  ],
+  "Purist": [
+    ["Perfect Streamline", "+47 % Waffenschaden, solange keiner deiner Skills auf Abklingzeit ist."]
+  ],
+  "Grown Great": [
+    ["Perfect Stabilize", "Jeder Schuss erhöht Genauigkeit um +1 % und Stabilität um +1 % (bis max. 75 %). Hörst du auf zu schießen, setzen sich die Boni nach 6 Sekunden zurück."]
+  ],
+  "Cold Relations": [
+    ["Perfectly Strained", "+10 % kritischer Trefferschaden für alle 0,5 Sekunden, die du feuerst. Stapelt bis zu 8 Mal."]
+  ],
+  "Swap Chain": [
+    ["Perfect Unwavering", "Zu dieser Waffe wechseln gewährt +400 % Waffenhandhabung für 5 Sekunden. Kills erneuern den Bonus. Das Wechseln weg von der Waffe deaktiviert den Effekt bei allen Waffen für 5 Sekunden."]
+  ],
+  "Safety Distance": [
+    ["Perfect Outsider", "Nach einem Kill erhältst du für 10 Sekunden +150 % optimale Reichweite und +125 % Genauigkeit."]
+  ],
+  "The Apartment": [
+    ["Perfectly Measured", "Die obere Magazinhälfte hat +25 % Feuerrate und -30 % Waffenschaden. Die untere Magazinhälfte hat -18 % Feuerrate und +38 % Gesamt-Waffenschaden."]
+  ],
+  "Cabaret": [
+    ["Perfect Thunder Strike", "Verstärkt den Waffenschaden um 35 % gegen schockierte Gegner. Nach 3 Kills wird der nächste getroffene Gegner geschockt."]
+  ],
+  "Interchange": [
+    ["Perfect Back and Forth", "Zu dieser Waffe wechseln gibt +13 % Feuerrate und +12 % Waffenschaden für 10 s. Von dieser Waffe weg wechseln gibt +5 % Feuerrate und +4,5 % Waffenschaden für 10 s. Ein Bonus entfernt den jeweils anderen, falls noch aktiv. Zwei Instanzen des Talents funktionieren nicht gleichzeitig."]
+  ],
+  "Old Glory": [
+    ["Perfectly Close & Personal", "Ein Kill innerhalb von 7 m gewährt +38 % Waffenschaden für 10 Sekunden."]
+  ],
+  "Carnage": [
+    ["Perfect Sadist", "Verstärkt den Waffenschaden um 35 % gegen blutende Gegner. Nach 3 Kills wird der nächste getroffene Gegner zum Bluten gebracht."]
+  ],
+  "Quiet Roar": [
+    ["Perfect Overwhelm", "Einen Gegner zu unterdrücken (der nicht bereits unterdrückt ist) gewährt +12 % Waffenschaden für 12 Sekunden. Max. 4 Stacks."]
+  ],
+  "Cricket": [
+    ["Perfect Precision Strike", "Kills auf Gegner weiter als 20 m bauen Stacks auf (max. 2). Ein Treffer auf einen Gegner innerhalb von 20 m verbraucht alle Stacks und gewährt +35 % verstärkten Schaden gegen Gegner innerhalb von 20 m für 5 Sekunden."]
+  ],
+  "Dare": [
+    ["Perfect Flatline", "Verstärkt den Waffenschaden um 20 % gegen gepulste Gegner. Nach 3 Kills wird der nächste getroffene Gegner gepulst."]
+  ],
+  "Good Times": [
+    ["Perfect Fast Hands", "Kritische Treffer geben einen Stack von +5 % Nachladegeschwindigkeit. Max. 40 Stacks."]
+  ],
+  "The Headline-grabber": [
+    ["Perfectly Strained", "+10 % kritischer Trefferschaden für alle 0,5 Sekunden, die du feuerst. Stapelt bis zu 8 Mal."]
+  ],
+  "Black Friday": [
+    ["Perfectly Unhinged", "+22 % Waffenschaden auf Kosten von -25 % Stabilität und -25 % Genauigkeit."]
+  ],
+  "Gear Shift": [
+    ["Perfectly Measured", "Die obere Magazinhälfte hat +25 % Feuerrate und -30 % Waffenschaden. Die untere Magazinhälfte hat -18 % Feuerrate und +38 % Gesamt-Waffenschaden."]
+  ],
+  "The Stinger": [
+    ["Swift", "Ein Cover-zu-Cover-Move gewährt +20 % Waffenschaden für 20 Sekunden."]
+  ],
+  "New Reliable": [
+    ["Perfectly Optimized", "+40 % Waffenhandhabung."]
+  ],
+  "Rusty": [
+    ["Perfect Pressure Point", "Verstärkt den Waffenschaden um 20 % gegen Gegner unter Statuseffekten."]
+  ],
+  "Big Show": [
+    ["Perfect Thunder Strike", "Verstärkt den Waffenschaden um 35 % gegen schockierte Gegner. Nach 3 Kills wird der nächste getroffene Gegner geschockt."]
+  ],
+  "Sleipnir": [
+    ["Perfect Frenzy", "Für je 8 Kugeln Magazinkapazität gibt es +3 % Feuerrate und +3 % Waffenschaden für 9 Sekunden, wenn du aus leerem Magazin nachlädst."]
+  ],
+  "Insult To Injury": [
+    ["Perfect Head Scratcher", "Verstärkt den Waffenschaden um 35 % gegen verwirrte Gegner. Nach 3 Kills wird der nächste getroffene Gegner verwirrt."]
+  ],
+  "Tabula Rasa": [
+    ["Perfectly Steady Handed", "Treffer geben einen Stack von +1 % Genauigkeit und Stabilität. Bei 75 Stacks werden sie verbraucht und das Magazin wird aufgefüllt."]
+  ],
+  "Designated Hitter": [
+    ["Perfect Reformation", "Kopftreffer gewähren +80 % Skill-Reparatur für 15 Sekunden."]
+  ],
+  "Relic": [
+    ["Perfectly Determined", "Nach einem Kopfschuss-Kill ist der nächste Treffer auf einen beliebigen Gegner ein garantierter kritischer Kopfschuss. Solange das Talent aktiv ist, löst ein weiterer Kill es nicht erneut aus."]
+  ],
+  "Ekim's Long stick": [
+    ["Perfect Ranger", "Verstärkt den Waffenschaden um 2 % für alle 3 m, die du vom Ziel entfernt bist."]
+  ],
+  "The Darkness": [
+    ["Perfect Eyeless", "Verstärkt den Waffenschaden um 35 % gegen geblendete Gegner. Nach 3 Kills wird der nächste getroffene Gegner geblendet."]
+  ],
+  "Brutus": [
+    ["Perfectly Behind You", "Verstärkt den Waffenschaden um +25 % gegen Gegner, die dich nicht anvisieren."]
+  ],
+  "Incendia": [
+    ["Perfect Lucky Shot", "+30 % Magazinkapazität. Fehlschüsse aus der Deckung kehren zu 100 % ins Magazin zurück."]
+  ],
+  "Pinprick": [
+    ["Perfect First Blood", "Mit Zielfernrohr (min. 8x Vergrößerung): Deine ersten 2 Schüsse außerhalb des Kampfes oder nach vollständigem Nachladen aus leerem Magazin verursachen Kopfschussschaden an jeder getroffenen Körperstelle."]
+  ],
+  "Scalpel": [
+    ["Future Perfection", "Waffen-Kills geben +1 Skill-Stufe für 19 Sekunden (bis zu 3x stapelbar). Waffen-Kills auf Skill-Stufe 6 gewähren Overcharge für 15 Sekunden (Abklingzeit Overcharge: 90 Sekunden)."]
+  ],
+  "Oh Carol": [
+    ["Twinkling Lights", "Nur nachts mit funkelnden Lichtern kannst du ihnen festliche Macht in die Köpfe füllen (Flavor-Talent). Zusätzlich +137 % Kopfschussschaden."]
+  ],
+  "Instigator": [
+    ["Perfect Soft Spot", "Das Zerstören eines Schwachpunkts gewährt +32 % Waffenschaden für 15 Sekunden."]
+  ],
+  "Commando": [
+    ["Perfectly Naked", "Ein Treffer auf einen Gegner ohne Rüstung gewährt +50 % Kopfschussschaden für 8 Sekunden."]
+  ],
+  "Rock n' Roll": [
+    ["Perfectly Extra", "+50 % Magazinkapazität."]
+  ],
+  "Lefty": [
+    ["Perfect Sledgehammer", "Schaden mit einer Granate markiert das Ziel. Markierte Ziele erleiden 20 % mehr Schaden an der Rüstung durch den markierenden Agenten und haben -30 % Bewegungsgeschwindigkeit. Die Markierung hält 10 Sekunden."]
+  ],
+  "The Send-Off": [
+    ["Perfect Distance", "+100 % optimale Reichweite."]
+  ],
+  "Thorn": [
+    ["Perfect Brazen", "Du erhältst +3,5 % verstärkten Schaden auf den nächsten Schuss für jede Schrotkugel, die das Ziel trifft, sofern mindestens 4 Kugeln treffen."]
+  ],
+  "Cuélebre": [
+    ["Perfect Jazz Hands", "+50 % Nachladegeschwindigkeit."]
+  ],
+  "Lockdown": [
+    ["Perfect Immobilize", "Verstärkt den Waffenschaden um 25 % gegen festgesetzte Gegner. Nach 3 Kills wird der nächste getroffene Gegner festgesetzt."]
+  ],
+  "Enforcer": [
+    ["Perfect Pummel", "2 Kills in Folge füllen das Magazin auf und gewähren +40 % Waffenschaden für 10 Sekunden."]
+  ],
+  "Like Glue": [
+    ["Perfect Brazen", "Du erhältst +3,5 % verstärkten Schaden auf den nächsten Schuss für jede Schrotkugel, die das Ziel trifft, sofern mindestens 4 Kugeln treffen."]
+  ],
+  "Tsunami": [
+    ["Perfect Pummel", "2 Kills in Folge füllen das Magazin auf und gewähren +40 % Waffenschaden für 10 Sekunden."]
+  ],
+  "Boomstick": [
+    ["Perfect Pumped Up", "Nachladen gewährt +6 % Waffenschaden für 10 Sekunden. Stapelt bis zu 5 Mal."]
+  ],
+  "Orbit": [
+    ["Perfect Finisher", "Von dieser Waffe wechseln, innerhalb von 10 Sekunden nach einem Kill, gewährt +35 % Chance auf kritische Treffer und +40 % kritischen Trefferschaden für 15 Sekunden."]
+  ],
+  "Quickstep": [
+    ["Sport Mode", "+20 % Bewegungsgeschwindigkeit. Der Bonus stapelt nicht mit anderen Bewegungsgeschwindigkeits-Boni."]
+  ],
+  "Prophet": [
+    ["Perfectly Determined", "Nach einem Kopfschuss-Kill ist der nächste Treffer auf einen beliebigen Gegner ein garantierter kritischer Kopfschuss. Solange das Talent aktiv ist, löst ein weiterer Kill es nicht erneut aus."]
+  ],
+  "Rabid D50": [
+    ["Foam at the Mouth", "Nach einem Kopfschuss-Kill wird der nächste getroffene Gegner festgesetzt. Verstärkt den Waffenschaden um 25 % gegen festgesetzte Gegner."]
+  ],
+  "Lightning Rod": [
+    ["Perfect Salvage", "Ein Kill hat eine Chance von 85 %, das Magazin aufzufüllen."]
+  ],
+  "Mozambique Special": [
+    ["Perfect Breadbasket", "Körpertreffer geben einen Stack von +70 % Kopfschussschaden für den nächsten Kopfschuss (10 Sekunden). Max. 2 Stacks."]
+  ],
 };
 
-const exoticWeaponEnglish = {"St. Elmo's Engine":[["Actum Est","Each hit against an enemy grants 1 stack. At 100 stacks, the next magazine is filled with Shock Ammo."]],"Capacitor":[["Capacitance","Hits against enemies build stacks (max 40). Each stack grants +1.5% Skill Damage; after 5 seconds without a hit, 1 stack decays per second. Each Skill Tier also grants +7.5% weapon damage."]],"Eagle Bearer":[["Eagle's Strike","Accuracy increases by up to +30% while firing continuously. Headshot kills activate the Tenacity buff for 15s; its strength increases by 1% per body shot and 5% per headshot."],["Tenacity","40–80% of incoming damage is delayed until the buff ends. Each kill while the buff is active reduces the delayed damage; after 3 kills, up to 100% can be mitigated."]],"Chameleon":[["Adaptive Instincts","30 headshots: +20% Critical Hit Chance and +50% Critical Hit Damage (45s). 65 body shots: +90% weapon damage (45s). 20 leg shots: +150% reload speed (45s). Buffs refresh while out of combat."]],"The Bighorn":[["Big Game Hunter","While aiming, the weapon switches to semi-automatic: each shot deals 450% weapon damage. Headshots grant +2% Headshot Damage, up to 50 stacks. At max stacks, 10 stacks expire every 4s; headshots delay the decay."]],"Strega":[["Unnerve","A kill marks all enemies near the killed target (according to the patch notes, within about 10m); multiple marks can be applied to the same enemy. Marked enemies take +15% amplified damage per mark."]],"Agitator":[["Perturb","Keep the weapon holstered for 10s to charge it; while holstered, you generate 50% less threat. Drawing the charged weapon grants +25% rate of fire and +30% weapon damage for 20s, but generates 100% more threat during that time."]],"Caduceus":[["Caduceus","All critical hits repair you and your allies for 3% of the damage dealt."]],"Ouroboros":[["Rule Them All","If you have a status effect active, 50% of the ammo in the next magazine applies the same status effect to enemies hit. Only works while in combat."]],"The Chatterbox":[["Incessant Chatter","Each hit increases rate of fire by 1%, up to +60%; the bonus resets when reloading."],["Box Magazine","Kills refill 20% of the magazine and start a 10-second buff: each hit increases magazine size by 1, up to 60. Another kill consumes the buff and fully refills the enlarged magazine."],["Blabbermouth","While the Chatterbox is holstered, reloading another weapon within 5s of a kill grants +20% rate of fire for 10s."]],"Lady Death":[["Breathe Free","While moving, you gain 4 stacks per second (8 while sprinting), up to 30. Each shot fired consumes 1 stack and increases damage by 75%. Kills additionally grant +20% movement speed for 10s."]],"Backfire":[["Payment in Kind","Your shots build stacks that increase Critical Hit Damage. The price: reloading causes bleed damage based on the number of stacks."]],"Oxpecker":[["Symbiosis","While your shield is deployed, it loses 10% health per second. In return, it repairs 25% of the damage dealt by Oxpecker. Intended for Ballistic Shield builds (Crusader/Striker)."]],"Underboss":[["Gangland Hit","Shots apply a mark that can move between enemies; multiple marks can be applied to the same enemy. Marked enemies take +20% amplified damage, plus 5% for each additional mark."]],"Pestilence":[["Plague of the Outcasts","Repeated hits (about 20 on the same enemy) infect the target. When an infected enemy dies, it leaves a toxic cloud for 10s (200% weapon damage per second), applying Pestilence to enemies inside: -50% received healing; downed enemies die instantly."]],"Iron Lung":[["Ardent","Firing heats the weapon and fills a heat meter (equal to 50% of the standard magazine size). When full, fired bullets ignite enemies. The meter decays when not firing; reloading or switching weapons resets it."]],"Bluescreen":[["Disruptor Rounds","Hits build stacks that apply Pulse, Disrupt, and Disorient to enemies; at maximum stacks, the effects apply to enemies within about 10m."]],"Big Alejandro":[["Cover Shooter","Each shot fired from cover increases weapon damage by 1%, up to +100%; the bonus lasts 15s and is extended by kills from cover. It expires when reloading, switching weapons, or leaving combat."]],"Bullet King":[["Bullet Hell","A huge 1,000-round magazine allows continuous fire without reloading. Older guides also state that every 100 hits refill ammunition for you and your allies."]],"Pakhan":[["Pakhan","Each kill with this weapon grants a stack of +75% magazine size for the next magazine, up to 4 stacks. Reloading then gives you a substantially larger magazine."]],"Vertigo":[["Startling","Whenever this weapon makes an enemy Suppressed, the enemy is applied Disorient, and you and allies receive +30% Damage to Targets Out of Cover for 15s."],["","Weapon Stats and Mods: Optics +15% Crit Chance, Magazine +50 Rounds, Underbarrel +15% Reload Speed, Muzzle +10% Rate of Fire."]],"Prima Donna":[["You Can Look… But You Can't Touch","While out of combat, the weapon builds up to 10 stacks; each stack grants +11% amplified damage. One stack is automatically consumed to fully repair an incoming hit; a new stack is generated every 3s."]],"Shroud":[["High Priority Target","Increases weapon damage by 125% against the highest-ranked enemies (Tier 1: e.g. Hunter, Rogue, Leader, Tank, Shield, Heavy Weapons, Medic; Tier 2: e.g. Support, Engineer, Bodyguard, Bomber; Tier 3: all others)."]],"Nemesis":[["Electromagnetic Accelerator","Hold the trigger to charge the shot; it fires when released. The longer it is charged, the higher the damage."]],"Mantis":[["In Plain Sight","Your scoped view displays additional information about enemies not targeting you. Headshot and weakpoint damage against enemies not targeting you amplified by 65%. Headshot kills reset the cooldown of the Decoy skill. This bonus will wait until the Decoy goes on cooldown if currently active."]],"Dread Edict":[["Full Stop","Hits build stacks, up to 20; headshots grant 2 stacks. Each stack grants +2% weapon damage and +5% Headshot Damage. Reloading removes all stacks, but grants 5% of your maximum armor as bonus armor per removed stack for 10s. Headshot kills fully refill the magazine and do not count as reloading."]],"Sacrum Imperium":[["The Trap","Aiming marks enemies, up to 10; currently, marking occurs after about 0.5s in the scope. A headshot kill on a marked enemy ignites all other targets for 10s and slows them by 50% (PvP: 20%). Cooldown 30s; each additional headshot kill reduces it by 10s."]],"The Ravenous":[["Geri und Freki","You switch shoulders: shots from one side load offensive primers onto the enemy, while shots from the other side load defensive primers. The primers are then detonated."]],"Diamondback":[["Agonizing Bite","Each shot marks a random enemy. Hitting the mark consumes it and guarantees a critical hit (+20% amplified damage). After such a hit, all shots are guaranteed critical hits for 5s. A new mark appears afterward and when reloading."]],"Doctor Home":[["Doctor's Orders","Shooting an enemy with this weapon applies a mark for 5 seconds. If a marked target is killed, it gives a 50% Armor repair kit that applies to the whole party. The kit will not give bonus armor."]],"Vindicator":[["Ortiz Assault Interface","While aiming, a random body zone is highlighted on each enemy; hits on that zone deal significantly more weapon damage (+40% at release). It works similarly to Mantis and pairs well with Decoy."]],"Merciless":[["Binary Trigger","Pulling and releasing the trigger each fire one shot. Hitting the same enemy with both grants 1 stack. At 7 stacks, the next hit triggers a 7m-radius explosion dealing 500% weapon damage."]],"Bittersweet":[["Transfusion","Headshots build stacks, up to 8. Shooting allies or skills repairs them for 50% of shot damage per stack; healed allies gain 200% of your Repair Skills bonus as bonus armor per stack for 10s. After healing at full stacks, all hits are guaranteed headshots for 8s."]],"Steel & Sons ACR":[["Confirm & Execute","PvE: body shots give the enemy 1 stack for 10s, up to 4; hitting another enemy removes all stacks. Each stack grants +4% amplified damage. The next headshot consumes all stacks and deals +11% amplified damage per stack. Destroying a weak point causes the enemy to take +30% amplified damage from you for 5s. PvP: reduced values (max 3 stacks for 6s, +3% and +9% per stack)."]],"Ruthless":[["Binary Trigger","Identical to Merciless: pulling and releasing the trigger each fire one shot. Hitting the same enemy with both grants 1 stack. At 7 stacks, the next hit triggers a 7m-radius explosion dealing 500% weapon damage."]],"Scorpio":[["Septic Shock","Each shot (not each pellet) grants the enemy a stack: stack 1 applies Poison, stack 3 Disorient, stack 6 Shock, and stack 7 makes the enemy take +20% damage from all sources. Stacks from multiple players add together. PvP uses different effects (Bleed, Disrupt, and Ensnare)."]],"Sheriff":[["Autentico","Built-in bonuses: +35% weapon damage, +100% accuracy, and no damage falloff over distance."]],"Overlord":[["Capitulate","Each pellet that hits reduces the enemy's movement speed by 4% for 5s. Shooting again refreshes the stacks."]],"Sweet Dreams":[["Sandman","Melee hits instantly kill normal (non-Elite) enemies. Cooldown: 15s."]],"Fafnir":[["Dragon's Breath","Fires incendiary rounds: 40% chance per shot to apply Burn. The weapon also increases weapon damage by 50% of your Status Effects bonus."]],"Lullaby":[["Sandman","Identical to Sweet Dreams (Lullaby is the pre-order variant): melee hits instantly kill normal (non-Elite) enemies. Cooldown: 15s."]],"Regulus":[["","Headshot kills trigger an explosion with about a 5m radius."]],"Liberty":[["Liberty or Death","Hits grant weapon-damage stacks; headshots consume stacks to repair armor. Particularly suited to shield and tank builds."]],"Busy Little Bee":[["Busy Little Bee","Hits on different enemies grant damage stacks; the bonus becomes active when switching weapons."]],"Tempest":[["Restrained","The pistol fires fully automatically and deals +25% amplified damage for 20s after your shield is destroyed."]],"Mosquito":[["Mosquito Song","Each hit gives the enemy a stack (stacks are shared between players). At 10 stacks, the enemy is forced to target the player who applied the last stack for 5s. Stacks decay every 5s."]],"Whiplash":[["Faster Than Reloading","After 5s in the holster, Whiplash is charged. Drawing it instantly reloads your primary and secondary weapons. Until the magazine is empty, it grants +20% rate of fire and +50% weapon damage; holstering it too early ends the bonus. Built-in: +50% swap speed."]],"Lichtenberg":[["Run and Gun","PvE: While moving, you accrue 5 stacks per second, up to a maximum of 100 stacks. Headshots with Lichtenberg grant 15 stacks and 20% Movement Speed for 5 seconds. While at maximum stacks, your next shot with Lichtenberg consumes all stacks, deals 200% bonus damage, and Shocks the target for 2 seconds. PvP: While moving, you accrue 5 stacks per second, up to a maximum of 100 stacks. Headshots with Lichtenberg grant 10 stacks and 10% Movement Speed for 3 seconds. While at maximum stacks, your next shot with Lichtenberg consumes all stacks, deals 70% bonus damage, and Shocks the target for 1 second."]]};
+const exoticWeaponEnglish = {"St. Elmo's Engine":[["Actum Est","Each hit against an enemy grants 1 stack. At 100 stacks, the next magazine is filled with Shock Ammo."]],"Capacitor":[["Capacitance","Hits against enemies build stacks (max 40). Each stack grants +1.5% Skill Damage; after 5 seconds without a hit, 1 stack decays per second. Each Skill Tier also grants +7.5% weapon damage."]],"Eagle Bearer":[["Eagle's Strike","Accuracy increases by up to +30% while firing continuously. Headshot kills activate the Tenacity buff for 15s; its strength increases by 1% per body shot and 5% per headshot."],["Tenacity","40–80% of incoming damage is delayed until the buff ends. Each kill while the buff is active reduces the delayed damage; after 3 kills, up to 100% can be mitigated."]],"Chameleon":[["Adaptive Instincts","30 headshots: +20% Critical Hit Chance and +50% Critical Hit Damage (45s). 65 body shots: +90% weapon damage (45s). 20 leg shots: +150% reload speed (45s). Buffs refresh while out of combat."]],"The Bighorn":[["Big Game Hunter","While aiming, the weapon switches to semi-automatic: each shot deals 450% weapon damage. Headshots grant +2% Headshot Damage, up to 50 stacks. At max stacks, 10 stacks expire every 4s; headshots delay the decay."]],"Strega":[["Unnerve","A kill marks all enemies near the killed target (according to the patch notes, within about 10m); multiple marks can be applied to the same enemy. Marked enemies take +15% amplified damage per mark."]],"Agitator":[["Perturb","Keep the weapon holstered for 10s to charge it; while holstered, you generate 50% less threat. Drawing the charged weapon grants +25% rate of fire and +30% weapon damage for 20s, but generates 100% more threat during that time."]],"Caduceus":[["Caduceus","All critical hits repair you and your allies for 3% of the damage dealt."]],"Ouroboros":[["Rule Them All","If you have a status effect active, 50% of the ammo in the next magazine applies the same status effect to enemies hit. Only works while in combat."]],"The Chatterbox":[["Incessant Chatter","Each hit increases rate of fire by 1%, up to +60%; the bonus resets when reloading."],["Box Magazine","Kills refill 20% of the magazine and start a 10-second buff: each hit increases magazine size by 1, up to 60. Another kill consumes the buff and fully refills the enlarged magazine."],["Blabbermouth","While the Chatterbox is holstered, reloading another weapon within 5s of a kill grants +20% rate of fire for 10s."]],"Lady Death":[["Breathe Free","While moving, you gain 4 stacks per second (8 while sprinting), up to 30. Each shot fired consumes 1 stack and increases damage by 75%. Kills additionally grant +20% movement speed for 10s."]],"Backfire":[["Payment in Kind","Your shots build stacks that increase Critical Hit Damage. The price: reloading causes bleed damage based on the number of stacks."]],"Oxpecker":[["Symbiosis","While your shield is deployed, it loses 10% health per second. In return, it repairs 25% of the damage dealt by Oxpecker. Intended for Ballistic Shield builds (Crusader/Striker)."]],"Underboss":[["Gangland Hit","Shots apply a mark that can move between enemies; multiple marks can be applied to the same enemy. Marked enemies take +20% amplified damage, plus 5% for each additional mark."]],"Pestilence":[["Plague of the Outcasts","Repeated hits (about 20 on the same enemy) infect the target. When an infected enemy dies, it leaves a toxic cloud for 10s (200% weapon damage per second), applying Pestilence to enemies inside: -50% received healing; downed enemies die instantly."]],"Iron Lung":[["Ardent","Firing heats the weapon and fills a heat meter (equal to 50% of the standard magazine size). When full, fired bullets ignite enemies. The meter decays when not firing; reloading or switching weapons resets it."]],"Bluescreen":[["Disruptor Rounds","Hits build stacks that apply Pulse, Disrupt, and Disorient to enemies; at maximum stacks, the effects apply to enemies within about 10m."]],"Big Alejandro":[["Cover Shooter","Each shot fired from cover increases weapon damage by 1%, up to +100%; the bonus lasts 15s and is extended by kills from cover. It expires when reloading, switching weapons, or leaving combat."]],"Bullet King":[["Bullet Hell","A huge 1,000-round magazine allows continuous fire without reloading. Older guides also state that every 100 hits refill ammunition for you and your allies."]],"Pakhan":[["Pakhan","Each kill with this weapon grants a stack of +75% magazine size for the next magazine, up to 4 stacks. Reloading then gives you a substantially larger magazine."]],"Vertigo":[["Startling","Whenever this weapon makes an enemy Suppressed, the enemy is applied Disorient, and you and allies receive +30% Damage to Targets Out of Cover for 15s."],["","Weapon Stats and Mods: Optics +15% Crit Chance, Magazine +50 Rounds, Underbarrel +15% Reload Speed, Muzzle +10% Rate of Fire."]],"Prima Donna":[["You Can Look… But You Can't Touch","While out of combat, the weapon builds up to 10 stacks; each stack grants +11% amplified damage. One stack is automatically consumed to fully repair an incoming hit; a new stack is generated every 3s."]],"Shroud":[["High Priority Target","Increases weapon damage by 125% against the highest-ranked enemies (Tier 1: e.g. Hunter, Rogue, Leader, Tank, Shield, Heavy Weapons, Medic; Tier 2: e.g. Support, Engineer, Bodyguard, Bomber; Tier 3: all others)."]],"Nemesis":[["Electromagnetic Accelerator","Hold the trigger to charge the shot; it fires when released. The longer it is charged, the higher the damage."]],"Mantis":[["In Plain Sight","Your scoped view displays additional information about enemies not targeting you. Headshot and weakpoint damage against enemies not targeting you amplified by 65%. Headshot kills reset the cooldown of the Decoy skill. This bonus will wait until the Decoy goes on cooldown if currently active."]],"Dread Edict":[["Full Stop","Hits build stacks, up to 20; headshots grant 2 stacks. Each stack grants +2% weapon damage and +5% Headshot Damage. Reloading removes all stacks, but grants 5% of your maximum armor as bonus armor per removed stack for 10s. Headshot kills fully refill the magazine and do not count as reloading."]],"Sacrum Imperium":[["The Trap","Aiming marks enemies, up to 10; currently, marking occurs after about 0.5s in the scope. A headshot kill on a marked enemy ignites all other targets for 10s and slows them by 50% (PvP: 20%). Cooldown 30s; each additional headshot kill reduces it by 10s."]],"The Ravenous":[["Geri und Freki","You switch shoulders: shots from one side load offensive primers onto the enemy, while shots from the other side load defensive primers. The primers are then detonated."]],"Diamondback":[["Agonizing Bite","Each shot marks a random enemy. Hitting the mark consumes it and guarantees a critical hit (+20% amplified damage). After such a hit, all shots are guaranteed critical hits for 5s. A new mark appears afterward and when reloading."]],"Doctor Home":[["Doctor's Orders","Shooting an enemy with this weapon applies a mark for 5 seconds. If a marked target is killed, it gives a 50% Armor repair kit that applies to the whole party. The kit will not give bonus armor."]],"Vindicator":[["Ortiz Assault Interface","While aiming, a random body zone is highlighted on each enemy; hits on that zone deal significantly more weapon damage (+40% at release). It works similarly to Mantis and pairs well with Decoy."]],"Merciless":[["Binary Trigger","Pulling and releasing the trigger each fire one shot. Hitting the same enemy with both grants 1 stack. At 7 stacks, the next hit triggers a 7m-radius explosion dealing 500% weapon damage."]],"Bittersweet":[["Transfusion","Headshots build stacks, up to 8. Shooting allies or skills repairs them for 50% of shot damage per stack; healed allies gain 200% of your Repair Skills bonus as bonus armor per stack for 10s. After healing at full stacks, all hits are guaranteed headshots for 8s."]],"Steel & Sons ACR":[["Confirm & Execute","PvE: body shots give the enemy 1 stack for 10s, up to 4; hitting another enemy removes all stacks. Each stack grants +4% amplified damage. The next headshot consumes all stacks and deals +11% amplified damage per stack. Destroying a weak point causes the enemy to take +30% amplified damage from you for 5s. PvP: reduced values (max 3 stacks for 6s, +3% and +9% per stack)."]],"Ruthless":[["Binary Trigger","Identical to Merciless: pulling and releasing the trigger each fire one shot. Hitting the same enemy with both grants 1 stack. At 7 stacks, the next hit triggers a 7m-radius explosion dealing 500% weapon damage."]],"Scorpio":[["Septic Shock","Each shot (not each pellet) grants the enemy a stack: stack 1 applies Poison, stack 3 Disorient, stack 6 Shock, and stack 7 makes the enemy take +20% damage from all sources. Stacks from multiple players add together. PvP uses different effects (Bleed, Disrupt, and Ensnare)."]],"Sheriff":[["Autentico","Built-in bonuses: +35% weapon damage, +100% accuracy, and no damage falloff over distance."]],"Overlord":[["Capitulate","Each pellet that hits reduces the enemy's movement speed by 4% for 5s. Shooting again refreshes the stacks."]],"Sweet Dreams":[["Sandman","Melee hits instantly kill normal (non-Elite) enemies. Cooldown: 15s."]],"Fafnir":[["Dragon's Breath","Fires incendiary rounds: 40% chance per shot to apply Burn. The weapon also increases weapon damage by 50% of your Status Effects bonus."]],"Lullaby":[["Sandman","Identical to Sweet Dreams (Lullaby is the pre-order variant): melee hits instantly kill normal (non-Elite) enemies. Cooldown: 15s."]],"Regulus":[["","Headshot kills trigger an explosion with about a 5m radius."]],"Liberty":[["Liberty or Death","Hits grant weapon-damage stacks; headshots consume stacks to repair armor. Particularly suited to shield and tank builds."]],"Busy Little Bee":[["Busy Little Bee","Hits on different enemies grant damage stacks; the bonus becomes active when switching weapons."]],"Tempest":[["Restrained","The pistol fires fully automatically and deals +25% amplified damage for 20s after your shield is destroyed."]],"Mosquito":[["Mosquito Song","Each hit gives the enemy a stack (stacks are shared between players). At 10 stacks, the enemy is forced to target the player who applied the last stack for 5s. Stacks decay every 5s."]],"Whiplash":[["Faster Than Reloading","After 5s in the holster, Whiplash is charged. Drawing it instantly reloads your primary and secondary weapons. Until the magazine is empty, it grants +20% rate of fire and +50% weapon damage; holstering it too early ends the bonus. Built-in: +50% swap speed."]],"Lichtenberg":[["Run and Gun","PvE: While moving, you accrue 5 stacks per second, up to a maximum of 100 stacks. Headshots with Lichtenberg grant 15 stacks and 20% Movement Speed for 5 seconds. While at maximum stacks, your next shot with Lichtenberg consumes all stacks, deals 200% bonus damage, and Shocks the target for 2 seconds. PvP: While moving, you accrue 5 stacks per second, up to a maximum of 100 stacks. Headshots with Lichtenberg grant 10 stacks and 10% Movement Speed for 3 seconds. While at maximum stacks, your next shot with Lichtenberg consumes all stacks, deals 70% bonus damage, and Shocks the target for 1 second."]],"Shield Splinterer":[["Perfect Optimist", "Weapon damage increases by 4.5% for every 10% of ammo missing from the magazine."]],"Huntsman":[["Perfect Frenzy", "For every 8 bullets of magazine capacity, gain +3% rate of fire and +3% weapon damage for 9 seconds when you reload from an empty magazine."]],"Caretaker":[["Perfect Killer", "A kill with a critical hit grants +90% critical hit damage for 10 seconds."]],"Savage Wolverine":[["Perfectly Close & Personal", "A kill within 7 m grants +38% weapon damage for 10 seconds."]],"Kingbreaker":[["Perfect Flatline", "Amplifies weapon damage by 20% against pulsed enemies. After 3 kills, the next enemy you hit is pulsed."]],"Mechanical Animal":[["Future Perfection", "Weapon kills grant +1 skill tier for 19 seconds (stacks up to 4x). Weapon kills at skill tier 6 grant Overcharge for 15 seconds (Overcharge cooldown: 90 seconds)."]],"Test Subject":[["Perfectly In Sync", "Hitting an enemy grants +20% skill damage for 5s. Using a non-shield skill or hitting an enemy with a skill grants +20% weapon damage for 5s. If both bonuses are active at the same time, the damage increases are doubled."]],"The Railsplitter":[["Perfectly Accurate", "+80% accuracy."]],"Invisible Hand":[["Perfect Allegro", "+15% rate of fire."]],"Manic":[["Perfectly Overflowing", "Every 2 reloads from an empty magazine increase your base magazine capacity by +100%."]],"Lud":[["Perfect Streamline", "+47% weapon damage while none of your skills are on cooldown."]],"Steamer":[["Perfect Boiling Point", "The first 48% of the magazine has -100% critical hit chance. The rest of the magazine has 100% critical hit chance."]],"The Archivist":[["Perfect Ranger", "Amplifies weapon damage by 2% for every 3 m you are away from the target."]],"First Bloom":[["Blossom Harvest", "Amplifies weapon damage by 3.3% for every 10% of combined armor and health the enemy has remaining."]],"Born Great":[["Perfect Stabilize", "Each shot increases accuracy by +1% and stability by +1% (up to a max of 75%). If you stop shooting, the bonuses reset after 6 seconds."]],"The Drill":[["Perfect Precision Strike", "Kills on enemies farther than 20 m build stacks (max 2). A hit on an enemy within 20 m consumes all stacks and grants +35% amplified damage against enemies within 20 m for 5 seconds."]],"Glory Daze":[["Perfectly Near Sighted", "+100% stability at the cost of -35% optimal range."]],"Pyromaniac":[["Perfectly Ignited", "+30% weapon damage against burning enemies. After 3 kills, the next enemy you hit is set on fire."]],"Burn Out":[["Perfectly On Empty", "Reloading from an empty magazine grants +80% weapon handling for 10 seconds."]],"Goalie":[["Perfect Pressure Point", "Amplifies weapon damage by 20% against enemies under status effects."]],"Baker's Dozen":[["Perfect Lucky Shot", "+30% magazine capacity. Missed shots fired from cover return 100% to the magazine."]],"Harmony":[["Perfectly In Sync", "Hitting an enemy grants +20% skill damage for 5s. Using a non-shield skill or hitting an enemy with a skill grants +20% weapon damage for 5s. If both bonuses are active at the same time, the damage increases are doubled."]],"Everlasting Gaze":[["Perfect Perpetuation", "Headshots grant +75% status effect damage and duration for the next status effect you apply. Cooldown: 16 seconds."]],"The Claw":[["Perfect Precision Strike", "Kills on enemies farther than 20 m build stacks (max 2). A hit on an enemy within 20 m consumes all stacks and grants +35% amplified damage against enemies within 20 m for 5 seconds."]],"Teapot":[["Perfect Boiling Point", "The first 48% of the magazine has -100% critical hit chance. The rest of the magazine has 100% critical hit chance."]],"Whisper":[["Perfectly Behind You", "Amplifies weapon damage by +25% against enemies who are not targeting you.", "One source lists +20% for Whisper."]],"The Virginian":[["Perfect Boomerang", "Critical hits have a 75% chance to return the bullet to the magazine. When a bullet is returned, the next shot deals +50% damage."]],"Surge":[["Perfect Spike", "Headshots grant +25% skill damage for 15 seconds."]],"Trader":[["Perfect Back and Forth", "Switching to this weapon grants +13% rate of fire and +12% weapon damage for 10s. Switching away from this weapon grants +5% rate of fire and +4.5% weapon damage for 10s. One bonus removes the other if still active. Two instances of the talent do not work at the same time."]],"Artist's Tool":[["Perfect Rifleman", "Headshots grant a stack of +11% weapon damage for 5 seconds (max 6 stacks). Further headshots refresh the duration."]],"Brain Break":[["Perfect Head Scratcher", "Amplifies weapon damage by 35% against disoriented enemies. After 3 kills, the next enemy you hit is disoriented."]],"Achilles":[["Perfect Soft Spot", "Destroying a weak point grants +32% weapon damage for 15 seconds."]],"Stage Left":[["Perfect Sledgehammer", "Damaging a target with a grenade marks it. Marked targets take 20% more armor damage from the marking agent and have -30% movement speed. The mark lasts 10 seconds."]],"Dark Winter":[["Perfect Killer", "A kill with a critical hit grants +90% critical hit damage for 10 seconds."]],"Emeline's Guard":[["Perfect Preservation", "A kill repairs 15% armor over 5 seconds. Headshot kills improve the repair by an additional 15%."]],"Froth":[["Perfect Immobilize", "Amplifies weapon damage by 25% against immobilized enemies. After 3 kills, the next enemy you hit is immobilized."]],"The Grudge":[["Perfectly Vindictive", "A kill on an enemy with a status effect grants you and all allies within 20 m +21% critical hit chance and +21% critical hit damage for 20 seconds."]],"Purist":[["Perfect Streamline", "+47% weapon damage while none of your skills are on cooldown."]],"Grown Great":[["Perfect Stabilize", "Each shot increases accuracy by +1% and stability by +1% (up to a max of 75%). If you stop shooting, the bonuses reset after 6 seconds."]],"Cold Relations":[["Perfectly Strained", "+10% critical hit damage for every 0.5 seconds you fire. Stacks up to 8 times."]],"Swap Chain":[["Perfect Unwavering", "Switching to this weapon grants +400% weapon handling for 5 seconds. Kills refresh the bonus. Switching away from the weapon disables the effect on all weapons for 5 seconds."]],"Safety Distance":[["Perfect Outsider", "After a kill, gain +150% optimal range and +125% accuracy for 10 seconds."]],"The Apartment":[["Perfectly Measured", "The upper half of the magazine has +25% rate of fire and -30% weapon damage. The lower half of the magazine has -18% rate of fire and +38% total weapon damage."]],"Cabaret":[["Perfect Thunder Strike", "Amplifies weapon damage by 35% against shocked enemies. After 3 kills, the next enemy you hit is shocked."]],"Interchange":[["Perfect Back and Forth", "Switching to this weapon grants +13% rate of fire and +12% weapon damage for 10s. Switching away from this weapon grants +5% rate of fire and +4.5% weapon damage for 10s. One bonus removes the other if still active. Two instances of the talent do not work at the same time."]],"Old Glory":[["Perfectly Close & Personal", "A kill within 7 m grants +38% weapon damage for 10 seconds."]],"Carnage":[["Perfect Sadist", "Amplifies weapon damage by 35% against bleeding enemies. After 3 kills, the next enemy you hit is made to bleed."]],"Quiet Roar":[["Perfect Overwhelm", "Suppressing an enemy (that is not already suppressed) grants +12% weapon damage for 12 seconds. Max 4 stacks."]],"Cricket":[["Perfect Precision Strike", "Kills on enemies farther than 20 m build stacks (max 2). A hit on an enemy within 20 m consumes all stacks and grants +35% amplified damage against enemies within 20 m for 5 seconds."]],"Dare":[["Perfect Flatline", "Amplifies weapon damage by 20% against pulsed enemies. After 3 kills, the next enemy you hit is pulsed."]],"Good Times":[["Perfect Fast Hands", "Critical hits grant a stack of +5% reload speed. Max 40 stacks."]],"The Headline-grabber":[["Perfectly Strained", "+10% critical hit damage for every 0.5 seconds you fire. Stacks up to 8 times."]],"Black Friday":[["Perfectly Unhinged", "+22% weapon damage at the cost of -25% stability and -25% accuracy."]],"Gear Shift":[["Perfectly Measured", "The upper half of the magazine has +25% rate of fire and -30% weapon damage. The lower half of the magazine has -18% rate of fire and +38% total weapon damage."]],"The Stinger":[["Swift", "A cover-to-cover move grants +20% weapon damage for 20 seconds."]],"New Reliable":[["Perfectly Optimized", "+40% weapon handling."]],"Rusty":[["Perfect Pressure Point", "Amplifies weapon damage by 20% against enemies under status effects."]],"Big Show":[["Perfect Thunder Strike", "Amplifies weapon damage by 35% against shocked enemies. After 3 kills, the next enemy you hit is shocked."]],"Sleipnir":[["Perfect Frenzy", "For every 8 bullets of magazine capacity, gain +3% rate of fire and +3% weapon damage for 9 seconds when you reload from an empty magazine."]],"Insult To Injury":[["Perfect Head Scratcher", "Amplifies weapon damage by 35% against disoriented enemies. After 3 kills, the next enemy you hit is disoriented."]],"Tabula Rasa":[["Perfectly Steady Handed", "Hits grant a stack of +1% accuracy and stability. At 75 stacks they are consumed and the magazine is refilled."]],"Designated Hitter":[["Perfect Reformation", "Headshots grant +80% skill repair for 15 seconds."]],"Relic":[["Perfectly Determined", "After a headshot kill, the next hit on any enemy is a guaranteed critical headshot. While the talent is active, another kill does not trigger it again."]],"Ekim's Long stick":[["Perfect Ranger", "Amplifies weapon damage by 2% for every 3 m you are away from the target."]],"The Darkness":[["Perfect Eyeless", "Amplifies weapon damage by 35% against blinded enemies. After 3 kills, the next enemy you hit is blinded."]],"Brutus":[["Perfectly Behind You", "Amplifies weapon damage by +25% against enemies who are not targeting you."]],"Incendia":[["Perfect Lucky Shot", "+30% magazine capacity. Missed shots fired from cover return 100% to the magazine."]],"Pinprick":[["Perfect First Blood", "With a scope (min. 8x magnification): Your first 2 shots outside of combat or after fully reloading from an empty magazine deal headshot damage on any body part hit."]],"Scalpel":[["Future Perfection", "Weapon kills grant +1 skill tier for 19 seconds (stacks up to 3x). Weapon kills at skill tier 6 grant Overcharge for 15 seconds (Overcharge cooldown: 90 seconds)."]],"Oh Carol":[["Twinkling Lights", "Only at night, with twinkling lights, can you fill their heads with festive power (flavor talent). Additionally +137% headshot damage."]],"Instigator":[["Perfect Soft Spot", "Destroying a weak point grants +32% weapon damage for 15 seconds."]],"Commando":[["Perfectly Naked", "Hitting an enemy without armor grants +50% headshot damage for 8 seconds."]],"Rock n' Roll":[["Perfectly Extra", "+50% magazine capacity."]],"Lefty":[["Perfect Sledgehammer", "Damaging a target with a grenade marks it. Marked targets take 20% more armor damage from the marking agent and have -30% movement speed. The mark lasts 10 seconds."]],"The Send-Off":[["Perfect Distance", "+100% optimal range."]],"Thorn":[["Perfect Brazen", "You gain +3.5% amplified damage on the next shot for every pellet that hits the target, provided at least 4 pellets hit."]],"Cuélebre":[["Perfect Jazz Hands", "+50% reload speed."]],"Lockdown":[["Perfect Immobilize", "Amplifies weapon damage by 25% against immobilized enemies. After 3 kills, the next enemy you hit is immobilized."]],"Enforcer":[["Perfect Pummel", "2 kills in a row refill the magazine and grant +40% weapon damage for 10 seconds."]],"Like Glue":[["Perfect Brazen", "You gain +3.5% amplified damage on the next shot for every pellet that hits the target, provided at least 4 pellets hit."]],"Tsunami":[["Perfect Pummel", "2 kills in a row refill the magazine and grant +40% weapon damage for 10 seconds."]],"Boomstick":[["Perfect Pumped Up", "Reloading grants +6% weapon damage for 10 seconds. Stacks up to 5 times."]],"Orbit":[["Perfect Finisher", "Switching away from this weapon within 10 seconds of a kill grants +35% critical hit chance and +40% critical hit damage for 15 seconds."]],"Quickstep":[["Sport Mode", "+20% movement speed. The bonus does not stack with other movement speed bonuses."]],"Prophet":[["Perfectly Determined", "After a headshot kill, the next hit on any enemy is a guaranteed critical headshot. While the talent is active, another kill does not trigger it again."]],"Rabid D50":[["Foam at the Mouth", "After a headshot kill, the next enemy you hit is immobilized. Amplifies weapon damage by 25% against immobilized enemies."]],"Lightning Rod":[["Perfect Salvage", "A kill has an 85% chance to refill the magazine."]],"Mozambique Special":[["Perfect Breadbasket", "Body shots grant a stack of +70% headshot damage for the next headshot (10 seconds). Max 2 stacks."]]};
 
 function escHTML(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
