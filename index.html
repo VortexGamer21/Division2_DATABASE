@@ -5331,7 +5331,7 @@ applyFilters();
   /* type 'cnt' = x/y Zähler (Name EN, Name DE, [ungenutzt], Maximum) | type 'lvl' = Stufe 0–10. Alle Startwerte sind 0. */
   const KH_DATA=[
     {id:'weapons', cls:'weapon', type:'cnt', de:'Waffen', en:'Weapons', items:[
-      ['Rifles','Gewehre',18,37],['Assault Rifles','Sturmgewehre',8,56],['Marksman Rifles','Scharfschützengewehre',17,34],
+      ['Rifles','Gewehre',18,38],['Assault Rifles','Sturmgewehre',8,56],['Marksman Rifles','Scharfschützengewehre',17,34],
       ['Shotguns','Schrotflinten',12,33],['SMGs','MPs',15,44],['LMGs','MGs',23,39],
       ['Pistols','Pistolen',6,33],['Specialization','Spezialisierung',2,6]]},
     {id:'gear', cls:'named', type:'cnt', de:'Named & Exotic Gear', en:'Named & Exotic Gear', items:[
@@ -5361,12 +5361,12 @@ applyFilters();
     de:{kicker:'KNOW-HOW // FORTSCHRITT',lede:'Verfolge deinen Know-how-Fortschritt: Marken und Gear Sets auf Stufe 10 bringen, dazu die Anzahl der Waffen, Named/Exotic-Gear-Teile und Skill-Varianten, mit denen du bereits vertraut bist. Alles wird automatisch in deinem Browser gespeichert.',
       search:'Suchen…',all:'Alle',open:'Offen',done:'Fertig',export:'Export',import:'Import',reset:'Reset',max:'MAX',allmax:'Alle auf Max',
       empty:'Nichts gefunden.',maxed:'auf Stufe 10',prof:'vertraut',total:'Gesamt',
-      note:'Hinweis: Dein Fortschritt liegt nur in diesem Browser (localStorage). Mit „Export“ speicherst du ihn als .txt-Datei, mit „Import“ lädst du diese Datei wieder ein, z. B. auf einem anderen Gerät. Alle Werte beginnen bei 0. Die Maximalwerte (z. B. 18/37) kannst du im Code unter KH_DATA anpassen, wenn neue Inhalte erscheinen.',
+      note:'Hinweis: Dein Fortschritt liegt nur in diesem Browser (localStorage). Mit „Export“ speicherst du ihn als .txt-Datei, mit „Import“ lädst du diese Datei wieder ein, z. B. auf einem anderen Gerät. Alle Werte beginnen bei 0. Die Maximalwerte (z. B. 18/38) kannst du im Code unter KH_DATA anpassen, wenn neue Inhalte erscheinen.',
       confirm:'Wirklich den kompletten Know-how-Fortschritt auf 0 zurücksetzen?',saved:'Export als .txt-Datei gespeichert',pasteHint:'Exportierten Text hier einfügen:',imported:'Import erfolgreich',bad:'Import fehlgeschlagen'},
     en:{kicker:'KNOW-HOW // PROGRESS',lede:'Track your Know-how progress: bring brands and gear sets to level 10, plus the number of weapons, named/exotic gear pieces and skill variants you are already proficient with. Everything is saved automatically in your browser.',
       search:'Search…',all:'All',open:'Open',done:'Done',export:'Export',import:'Import',reset:'Reset',max:'MAX',allmax:'Max all',
       empty:'Nothing found.',maxed:'at level 10',prof:'proficient',total:'Total',
-      note:'Note: your progress is stored only in this browser (localStorage). “Export” saves it as a .txt file; “Import” loads that file again, e.g. on another device. All values start at 0. You can adjust the maximums (e.g. 18/37) in the code under KH_DATA when new content is released.',
+      note:'Note: your progress is stored only in this browser (localStorage). “Export” saves it as a .txt file; “Import” loads that file again, e.g. on another device. All values start at 0. You can adjust the maximums (e.g. 18/38) in the code under KH_DATA when new content is released.',
       confirm:'Really reset all Know-how progress to 0?',saved:'Export saved as .txt file',pasteHint:'Paste exported text here:',imported:'Import successful',bad:'Import failed'}
   };
   const lang=()=>document.documentElement.lang==='en'?'en':'de';
