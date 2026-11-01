@@ -119,10 +119,11 @@
   }
   .stat-row .stat:nth-child(1){ border-top-color: var(--gear); }
   .stat-row .stat:nth-child(2){ border-top-color: var(--brand); }
-  .stat-row .stat:nth-child(3){ border-top-color: var(--gold); }
-  .stat-row .stat:nth-child(4){ border-top-color: var(--weapon); }
-  .stat-row .stat:nth-child(5){ border-top-color: var(--yellow); }
-  .stat-row .stat:nth-child(6){ border-top-color: var(--weapon); }
+  .stat-row .stat:nth-child(3){ border-top-color: var(--yellow); }
+  .stat-row .stat:nth-child(4){ border-top-color: var(--gold); }
+  .stat-row .stat:nth-child(5){ border-top-color: var(--weapon); }
+  .stat-row .stat:nth-child(6){ border-top-color: var(--gold); }
+  .stat-row .stat:nth-child(7){ border-top-color: var(--text-dim); }
   .stat .num{
     font-family:'Oswald', sans-serif;
     font-size: 30px;
@@ -1704,12 +1705,13 @@ var t=new Date(m).getTime();if(!isNaN(t)&&Date.now()>=t)document.documentElement
 <h1><span class="h1-site">The Division 2 Database</span>Gear Sets, Brand Sets <span>&amp;</span> Waffen</h1>
 <p class="lede">Alle Ausrüstungs- und Marken-Sets aus The Division 2 in einer durchsuchbaren Übersicht — jedes Set mit vollständigen Set-Boni und Talenten direkt sichtbar. Dazu alle exotischen Kleidungsstücke (Masken, Brust, Rucksack, Holster, Handschuhe, Knie) mit ihrem Kern-Talent, sowie alle Standard-, Named- und Exotic-Waffen, sortiert nach Waffenklasse.</p>
 <div class="stat-row">
-<div class="stat"><div class="num">28</div><div class="lbl" data-de="GEAR SETS" data-en="GEAR SETS">GEAR SETS</div></div>
-<div class="stat"><div class="num">37</div><div class="lbl" data-de="MARKEN-SETS" data-en="BRAND SETS">MARKEN-SETS</div></div>
-<div class="stat"><div class="num">65</div><div class="lbl" data-de="SETS GESAMT" data-en="TOTAL SETS">SETS GESAMT</div></div>
-<div class="stat"><div class="num">33</div><div class="lbl" data-de="EXOTISCHE KLEIDUNG" data-en="EXOTIC GEAR">EXOTISCHE KLEIDUNG</div></div>
-<div class="stat"><div class="num">69</div><div class="lbl" data-de="BENANNTES GEAR" data-en="NAMED GEAR">BENANNTES GEAR</div></div>
-<div class="stat"><div class="num" id="wpCountStat">—</div><div class="lbl" data-de="WAFFEN ERFASST" data-en="WEAPONS TRACKED">WAFFEN ERFASST</div></div>
+<div class="stat"><div class="num" id="stGear">—</div><div class="lbl" data-de="GEAR SETS" data-en="GEAR SETS">GEAR SETS</div></div>
+<div class="stat"><div class="num" id="stBrand">—</div><div class="lbl" data-de="MARKEN-SETS" data-en="BRAND SETS">MARKEN-SETS</div></div>
+<div class="stat"><div class="num" id="stExoGear">—</div><div class="lbl" data-de="EXOTISCHE KLEIDUNG" data-en="EXOTIC GEAR">EXOTISCHE KLEIDUNG</div></div>
+<div class="stat"><div class="num" id="stNamedGear">—</div><div class="lbl" data-de="BENANNTES GEAR" data-en="NAMED GEAR">BENANNTES GEAR</div></div>
+<div class="stat"><div class="num" id="stExoWp">—</div><div class="lbl" data-de="EXOTISCHE WAFFEN" data-en="EXOTIC WEAPONS">EXOTISCHE WAFFEN</div></div>
+<div class="stat"><div class="num" id="stNamedWp">—</div><div class="lbl" data-de="NAMED WAFFEN" data-en="NAMED WEAPONS">NAMED WAFFEN</div></div>
+<div class="stat"><div class="num" id="stStdWp">—</div><div class="lbl" data-de="STANDARD-WAFFEN" data-en="STANDARD WEAPONS">STANDARD-WAFFEN</div></div>
 </div>
 </header>
 <div class="controls">
@@ -3756,7 +3758,20 @@ weaponCategories.forEach(cat => {
   wpCategories.appendChild(wrap);
 });
 
-document.getElementById('wpCountStat').textContent = totalWeapons;
+document.getElementById('wpCountStat') && (document.getElementById('wpCountStat').textContent = totalWeapons);
+(function(){
+  const set=(id,v)=>{const el=document.getElementById(id); if(el) el.textContent=v;};
+  let exoG=0; exoticGear.forEach(([slot,items])=>{ exoG+=items.length; });
+  const wp={exotic:0,named:0,standard:0};
+  weaponCategories.forEach(c=>{ for(const k in wp) wp[k]+=c.groups[k].length; });
+  set('stGear', gearSets.length);
+  set('stBrand', brandSets.length);
+  set('stExoGear', exoG);
+  set('stNamedGear', document.querySelectorAll('.named-gear-card').length);
+  set('stExoWp', wp.exotic);
+  set('stNamedWp', wp.named);
+  set('stStdWp', wp.standard);
+})();
 
 /* ---------- filter & search ---------- */
 const searchInput = document.getElementById('searchInput');
