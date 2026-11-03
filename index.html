@@ -1378,7 +1378,7 @@
   body.tab-knowhow #viewKnowhow{ display:block; }
   body.tab-knowhow #viewDb{ display:none; }
 
-  .kh-hero{ padding:40px 0 26px; border-bottom:1px solid var(--line-soft); }
+  .kh-hero{ position:relative; padding:40px 0 26px; border-bottom:1px solid var(--line-soft); }
   .kh-hero .kicker{
     display:inline-flex; align-items:center; gap:9px; font-size:11px; color:var(--yellow);
     letter-spacing:.14em; padding:7px 13px; border:1px solid var(--yellow-dim);
@@ -2145,6 +2145,13 @@ var t=new Date(m).getTime();if(!isNaN(t)&&Date.now()>=t)document.documentElement
 </div><!-- /viewDb -->
 <div id="viewKnowhow">
 <header class="kh-hero">
+<div aria-live="polite" class="wip-badge" role="status">
+<span aria-hidden="true" class="wip-icon">!</span>
+<span>
+<span class="wip-title">IN BEARBEITUNG</span>
+<span class="wip-text">Die Seite wird laufend aktualisiert. Größere Updates und Patchnotes werden geprüft, damit Änderungen an Waffen, Sets und Talenten möglichst zeitnah übernommen werden.</span>
+</span>
+</div>
 <div class="kicker" id="khKicker">KNOW-HOW // FORTSCHRITT</div>
 <h1 id="khTitle">Know-how <span>Tracker</span></h1>
 <p id="khLede"></p>
@@ -2171,6 +2178,13 @@ var t=new Date(m).getTime();if(!isNaN(t)&&Date.now()>=t)document.documentElement
 </div>
 <div id="viewExotic">
 <header class="kh-hero">
+<div aria-live="polite" class="wip-badge" role="status">
+<span aria-hidden="true" class="wip-icon">!</span>
+<span>
+<span class="wip-title">IN BEARBEITUNG</span>
+<span class="wip-text">Die Seite wird laufend aktualisiert. Größere Updates und Patchnotes werden geprüft, damit Änderungen an Waffen, Sets und Talenten möglichst zeitnah übernommen werden.</span>
+</span>
+</div>
 <div class="kicker" id="ecKicker"></div>
 <h1 id="ecTitle"></h1>
 <p id="ecLede"></p>
@@ -2383,7 +2397,11 @@ const gearSets = [
 ["Ember Engine","+8% Skill-Effizienz","+30% Status-Effekte",
  "Spontaneous Combustion — jeder angewandte Statuseffekt hat 40% Chance, zusätzlich Brand auszulösen; war der ursprüngliche Effekt Brand, erhält das Ziel +25% Brandschaden für die Branddauer.",
  "White Hot — verlängert die Dauer des Brand-Schadens-Debuffs um 50%.",
- "Flashpoint — erhöht die Brand-Auslösechance von 40% auf 60%.", false]
+ "Flashpoint — erhöht die Brand-Auslösechance von 40% auf 60%.", false],
+["Apex Protocol","2-PIECE","3-PIECE",
+ "4-PIECE TALENT",
+ "BACKPACK TALENT (4-PIECE)",
+ "CHEST TALENT (4-PIECE)", false]
 ];
 
 const brandSets = [
@@ -2762,6 +2780,7 @@ const weaponStats = {
   "Military AK-M": {dmg:64717, rpm:600, mag:30, reload:2.3, range:27, magDmg:1941510, burst:647170, sustain:366323},
   "TKB-408": {dmg:63509, rpm:600, mag:30, reload:1.87, range:27, magDmg:1905270, burst:635090, sustain:391226},
   "Mk16": {dmg:59221, rpm:650, mag:30, reload:2.02, range:31, magDmg:1776630, burst:641561, sustain:370964},
+  "Malinois": {dmg:59221, rpm:650, mag:30, reload:2.02, range:31, magDmg:1776630, burst:641561, sustain:370964},
   "PDR": {dmg:57618, rpm:700, mag:30, reload:2.04, range:31, magDmg:1728540, burst:672210, sustain:374838},
   "SIG 556": {dmg:55935, rpm:700, mag:30, reload:2.17, range:28, magDmg:1678050, burst:652575, sustain:353912},
   "Military G36": {dmg:52564, rpm:750, mag:30, reload:2.34, range:35, magDmg:1576920, burst:657050, sustain:332684},
@@ -3624,6 +3643,10 @@ const gearSetEnglish = {
     p2: "+30% Magazine Size", p3: "+30% LMG Damage",
     t4: "Shooting builds stacks to a max of 50. Each stack provides +0.5% Weapon Handling and +5% Critical Hit Damage. Lose 6 stacks per second while not shooting. No stacks are lost if an enemy is Suppressed.",
     backpack: "Increase the Critical Hit Damage received per stack from 5 to 8.", chest: "Sustainability — Increase Throttle Control maximum number of stacks from 50 to 75."
+  },
+  "Apex Protocol": {
+    p2: "2-PIECE", p3: "3-PIECE", t4: "4-PIECE TALENT",
+    backpack: "BACKPACK TALENT (4-PIECE)", chest: "CHEST TALENT (4-PIECE)"
   }
 };
 
@@ -4736,12 +4759,14 @@ applyFilters();
         ? '© 2026 VortexGamer21 · All rights reserved. · Original design &amp; page structure: VortexGamer21 · Designed with assistance from Cloud AI'
         : '© 2026 VortexGamer21 · Alle Rechte vorbehalten. · Originaldesign &amp; Seitenstruktur: VortexGamer21 · Mit Unterstützung von Cloud AI gestaltet';
     }
-    const wipTitle=document.querySelector('.wip-badge .wip-title');
-    const wipText=document.querySelector('.wip-badge .wip-text');
-    if(wipTitle) wipTitle.textContent=english ? 'WORK IN PROGRESS' : 'IN BEARBEITUNG';
-    if(wipText) wipText.textContent=english
-      ? 'This page is continuously updated. Major updates and patch notes are reviewed so changes to weapons, sets and talents can be added as promptly as possible.'
-      : 'Die Seite wird laufend aktualisiert. Größere Updates und Patchnotes werden geprüft, damit Änderungen an Waffen, Sets und Talenten möglichst zeitnah übernommen werden.';
+    document.querySelectorAll('.wip-badge .wip-title').forEach(el=>{
+      el.textContent=english ? 'WORK IN PROGRESS' : 'IN BEARBEITUNG';
+    });
+    document.querySelectorAll('.wip-badge .wip-text').forEach(el=>{
+      el.textContent=english
+        ? 'This page is continuously updated. Major updates and patch notes are reviewed so changes to weapons, sets and talents can be added as promptly as possible.'
+        : 'Die Seite wird laufend aktualisiert. Größere Updates und Patchnotes werden geprüft, damit Änderungen an Waffen, Sets und Talenten möglichst zeitnah übernommen werden.';
+    });
 
     textNodes.forEach(([node,de])=>node.nodeValue=english ? translate(de) : de);
     placeholders.forEach(([el,de])=>el.placeholder=english ? translate(de) : de);
@@ -5623,12 +5648,12 @@ applyFilters();
   /* type 'cnt' = x/y Zähler (Name EN, Name DE, [ungenutzt], Maximum) | type 'lvl' = Stufe 0–10. Alle Startwerte sind 0. */
   const KH_DATA=[
     {id:'weapons', cls:'weapon', type:'cnt', de:'Waffen', en:'Weapons', items:[
-      ['Rifles','Gewehre',18,38],['Assault Rifles','Sturmgewehre',8,57],['Marksman Rifles','Scharfschützengewehre',17,34],
+      ['Rifles','Gewehre',18,38],['Assault Rifles','Sturmgewehre',8,58],['Marksman Rifles','Scharfschützengewehre',17,34],
       ['Shotguns','Schrotflinten',12,33],['SMGs','MPs',15,44],['LMGs','MGs',23,39],
       ['Pistols','Pistolen',6,33],['Specialization','Spezialisierung',2,6]]},
     {id:'gear', cls:'named', type:'cnt', de:'Named & Exotic Gear', en:'Named & Exotic Gear', items:[
       ['Masks','Masken',1,12],['Body Armor','Körperschutz',3,31],['Backpacks','Rucksäcke',5,30],
-      ['Gloves','Handschuhe',2,12],['Holsters','Holster',1,13],['Kneepads','Knieschützer',1,12]]},
+      ['Gloves','Handschuhe',2,13],['Holsters','Holster',1,13],['Kneepads','Knieschützer',1,12]]},
     {id:'skills', cls:'skill', type:'cnt', de:'Skills', en:'Skills', items:[
       ['Sticky Bomb','Haftbombe',0,3],['Trap','Falle',0,3],['Decoy','Köder',1,1],
       ['Pulse','Puls',1,5],['Turret','Geschützturm',0,4],['Hive','Bienenstock',1,5],
@@ -5646,7 +5671,7 @@ applyFilters();
       ['Breaking Point',null,1],['Aegis',null,2],['Cavalier'],['Ortiz: Exuro'],['Hotshot',null,1],['Umbra Initiative'],
       ['Heartbreaker'],['Rigger'],["Hunter's Fury",null,1],['Eclipse Protocol'],["Striker's Battlegear"],['Future Initiative'],
       ['Foundry Bulwark',null,1],['System Corruption'],['Ember Engine',null,3],['Ortiz: Reficere',null,1],['Aces & Eights',null,2],
-      ['Tip of the Spear',null,1],["Negotiator's Dilemma"],['Hard Wired',null,1],['True Patriot'],['Ongoing Directive']]}
+      ['Tip of the Spear',null,1],["Negotiator's Dilemma"],['Hard Wired',null,1],['True Patriot'],['Ongoing Directive'],['Apex Protocol']]}
   ];
 
   const T={
