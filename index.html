@@ -1756,6 +1756,32 @@ h1,h2,h3,.display{ font-weight:700; letter-spacing:.01em; }
 
 /* Farbige Seitenbalken sauber in die runden Ecken einpassen */
 .card,.named-gear-card,.bt-card{ overflow:hidden; }
+
+/* WIP-Hinweis: in die Tab-Zeile neben die Auswahl, damit er keine Texte überdeckt */
+@media (min-width:1200px){
+  .hero .wip-badge{ top:-67px; right:0; width:560px; padding:8px 12px; }
+  .kh-hero .wip-badge{ top:-67px; right:0; width:560px; padding:8px 12px; }
+  .wip-badge .wip-text{ font-size:10px; line-height:1.4; }
+}
+@media (max-width:1199px){
+  .hero .wip-badge,.kh-hero .wip-badge{ position:static; width:100%; max-width:none; margin:0 0 18px; }
+  .hero .wip-badge,.kh-hero .wip-badge{ margin-top:38px; }
+}
+
+/* Know-how / Exotic Collector (und Tracker): Kopfbereich wie in der Datenbank als Glas-Panel */
+.kh-hero,.ph-hero,.bt-hero{ position:relative; margin-top:22px; padding:40px 36px 34px; border:1px solid rgba(255,255,255,.09); border-radius:18px;
+  background:rgba(9,12,17,.58); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+.kh-hero .kicker{ border-radius:999px; font-family:'Rajdhani',sans-serif; font-weight:600; font-size:13px; }
+/* DE/EN-Auswahl: aktive Sprache gelb wie in der Datenbank */
+.kh-lang button{ font-weight:600; letter-spacing:.06em; padding:7px 13px; border-radius:3px; }
+.kh-lang button.active{ background:var(--gold); color:#191204; box-shadow:none; }
+
+/* DE/EN-Auswahl im Kasten oben rechts, exakt wie in der Datenbank */
+.wrap{ position:relative; }
+.main-tabs .kh-lang{ position:absolute; top:90px; right:29px; margin:0; gap:3px; padding:3px; background:rgba(10,12,15,.85);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:20; }
+.main-tabs .kh-lang button{ font:600 11px 'JetBrains Mono',monospace; letter-spacing:.06em; padding:7px 13px; }
+@media (max-width:560px){ .main-tabs .kh-lang{ position:static; margin-left:auto; } }
 </style>
 </head>
 <body>
