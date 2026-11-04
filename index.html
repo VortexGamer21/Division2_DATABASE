@@ -2509,10 +2509,10 @@ const gearSets = [
  "Spontaneous Combustion — jeder angewandte Statuseffekt hat 40% Chance, zusätzlich Brand auszulösen; war der ursprüngliche Effekt Brand, erhält das Ziel +25% Brandschaden für die Branddauer.",
  "White Hot — verlängert die Dauer des Brand-Schadens-Debuffs um 50%.",
  "Flashpoint — erhöht die Brand-Auslösechance von 40% auf 60%.", false],
-["Apex Protocol","2-PIECE","3-PIECE",
- "4-PIECE TALENT",
- "BACKPACK TALENT (4-PIECE)",
- "CHEST TALENT (4-PIECE)", false]
+["Apex Protocol","+10% Waffenschaden &amp; +10% Skillschaden","+15% Waffenhandhabung &amp; +15% Gefahrenschutz",
+ "Apex Engine — Waffentreffer bauen Stacks auf. Bei 100 Stacks werden alle Stacks verbraucht, um einen Stack mit +1 Skill-Stufe und +65% Waffenschaden für 30 Sekunden zu gewähren bzw. zu erneuern und alle aktiven Skill-Abklingzeiten um 10 Sekunden zu verringern. Dieses Talent kann maximal 3 Bonus-Stacks gleichzeitig gewähren. Der Basis-Zerfall der Waffentreffer-Stacks beträgt 10 Stacks alle 5 Sekunden. Der Zerfall wird um 5 Stacks verringert, wenn zwei Guardian-Skills ausgerüstet sind. Der Stack-Zerfall pausiert für 10 Sekunden, sobald ein Guardian-Skill eingesetzt wird.",
+ "",
+ "Solange die maximale Anzahl an Apex-Engine-Stacks erreicht ist, werden Gegner, die durch deine Skills Schaden erleiden, für 10 Sekunden markiert. Verursacht +20% verstärkten Schaden an markierten Gegnern.", false]
 ];
 
 const brandSets = [
@@ -3764,8 +3764,10 @@ const gearSetEnglish = {
     backpack: "Increase the Critical Hit Damage received per stack from 5 to 8.", chest: "Sustainability — Increase Throttle Control maximum number of stacks from 50 to 75."
   },
   "Apex Protocol": {
-    p2: "2-PIECE", p3: "3-PIECE", t4: "4-PIECE TALENT",
-    backpack: "BACKPACK TALENT (4-PIECE)", chest: "CHEST TALENT (4-PIECE)"
+    p2: "+10% Weapon Damage &amp; +10% Skill Damage", p3: "+15% Weapon Handling &amp; +15% Hazard Protection",
+    t4: "Apex Engine — Weapon hits build stacks. Upon reaching 100 stacks, all stacks are consumed to grant and refresh a stack of +1 Skill Tier and +65% Weapon Damage for 30s and reduce all active Skill Cooldowns by 10s. The maximum number of bonus stacks that can be granted by this talent at one time is 3. Base stack decay for the weapon hits is 10 stacks every 5s. The decay is decreased by 5 stacks if two Guardian Skills are equipped. Stack decay is halted for 10s upon deploying a Guardian Skill.",
+    backpack: "",
+    chest: "While at maximum Apex Engine stacks, enemies damaged by your Skills are marked for 10s. Deal +20% Amplified Damage to marked enemies."
   }
 };
 
@@ -3820,8 +3822,8 @@ const gearSetGerman = {
 };
 
 const apexPendingText = {
-  de: 'Die Werte und die Beschreibung werden nachgetragen, sobald sie im Spiel verifiziert wurden.',
-  en: 'The values and description will be added once they have been verified in-game.'
+  de: 'Das Rucksack-Talent wird nachgetragen, sobald es gefunden wurde.',
+  en: 'The backpack talent will be added once it has been found.'
 };
 
 gearSets.forEach((s, i) => {
@@ -3845,11 +3847,11 @@ gearSets.forEach((s, i) => {
       <div class="t-label">RUCKSACK-TALENT (4-TLG.)</div>
       <div class="t-body">${s[4]}</div>
     </div>
+    ${s[0]==='Apex Protocol' ? `<div class="gear-pending" data-de="${apexPendingText.de}" data-en="${apexPendingText.en}">${apexPendingText.de}</div>` : ''}
     <div class="talent">
       <div class="t-label">BRUST-TALENT (4-TLG.)</div>
       <div class="t-body">${s[5]}</div>
     </div>
-    ${s[0]==='Apex Protocol' ? `<div class="gear-pending" data-de="${apexPendingText.de}" data-en="${apexPendingText.en}">${apexPendingText.de}</div>` : ''}
   `;
   const en = gearSetEnglish[s[0]];
   if (en) {
