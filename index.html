@@ -2858,6 +2858,7 @@ const weaponStats = {
   "1886": {dmg:386989, rpm:100, mag:8, reload:4.11, range:35, magDmg:3095912, burst:644982, sustain:347465},
   "Classic M1A": {dmg:231346, rpm:180, mag:10, reload:2.60, range:60, magDmg:2313460, burst:694038, sustain:389909},
   "Lichtenberg": {dmg:231346, rpm:180, mag:10, reload:2.60, range:60, magDmg:2313460, burst:694038, sustain:389909},
+  "Cooler": {dmg:0, rpm:320, mag:15, reload:null, range:60, magDmg:0, burst:0, sustain:0, hs:60, acc:50, stab:65}, // Wasserstrahl, kein Schaden; Werte laut Screenshot (Nachladezeit unbekannt)
 
   // --- Schrotflinten ---
   "Scorpio": {dmg:409569, pellet:"8× 51.196", rpm:130, mag:7, reload:2.43, range:14, magDmg:2866983, burst:887400, sustain:506465},
@@ -3574,11 +3575,14 @@ function weaponStatsBlock(name){
       <div class="ws"><span>BASE DAMAGE</span><b>${fmtDE(s.dmg)}${s.pellet ? `<span class="pellet">(${s.pellet})</span>` : ''}</b></div>
       <div class="ws"><span>RPM</span><b>${s.rpm}</b></div>
       <div class="ws"><span>MAG</span><b>${s.mag}</b></div>
-      <div class="ws"><span>RELOAD</span><b>${s.reload}s</b></div>
+      <div class="ws"><span>RELOAD</span><b>${s.reload != null ? s.reload + 's' : '—'}</b></div>
       <div class="ws"><span>OPTIMAL RANGE</span><b>${s.range}m</b></div>
       <div class="ws"><span>MAG DAMAGE</span><b>${fmtDE(s.magDmg)}</b></div>
       <div class="ws hl"><span>BURST DPS</span><b>${fmtDE(s.burst)}</b></div>
       <div class="ws hl"><span>SUSTAIN DPS</span><b>${fmtDE(s.sustain)}</b></div>
+      ${s.hs != null ? `<div class="ws"><span>HEADSHOT DMG</span><b>${s.hs}%</b></div>` : ''}
+      ${s.acc != null ? `<div class="ws"><span>ACCURACY</span><b>${s.acc}%</b></div>` : ''}
+      ${s.stab != null ? `<div class="ws"><span>STABILITY</span><b>${s.stab}%</b></div>` : ''}
     </div>`;
 }
 
