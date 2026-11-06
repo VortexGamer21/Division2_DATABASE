@@ -1429,6 +1429,8 @@
   .kh-card.done{ border-color:var(--yellow-dim); border-left-color:var(--yellow); box-shadow:0 0 0 1px rgba(255,214,10,.08) inset, 0 12px 26px -18px rgba(255,214,10,.3); }
   .kh-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
   .kh-name{ font-family:'Rajdhani',sans-serif; font-weight:500; font-size:16px; color:#fff; line-height:1.2; }
+  .kh-name.has-logo{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .kh-logo{ width:30px; height:30px; flex:0 0 30px; object-fit:contain; filter:drop-shadow(0 2px 4px rgba(0,0,0,.5)); }
   .kh-badge{ font-size:9.5px; letter-spacing:.1em; color:#1a1500; background:var(--yellow); border-radius:3px; padding:2px 6px; font-weight:600; display:none; }
   .kh-card.done .kh-badge{ display:inline-block; }
   .kh-row{ display:flex; align-items:center; justify-content:space-between; margin-top:12px; gap:8px; }
@@ -5939,6 +5941,16 @@ applyFilters();
   const $=id=>document.getElementById(id);
   const label=(sec,it)=>{ if(sec.type==='cnt') return lang()==='de'?it[1]:it[0]; return it[0]; };
 
+  /* Icons der Marken und Gear Sets: gleiche Quelle wie in der Datenbank (BRAND_LOGOS), Namen mit abweichendem Key werden hier zugeordnet */
+  const LOGO_ALIAS={'hana-u-corporation':'hana-u','sokolov-concern':'sokolov','grupo-sombra-s-a':'grupo-sombra','ceska-vyroba-s-r-o':'ceska-vyroba','china-light-industries':'china-light','legatus-s-p-a':'legatus','richter-kaiser-gmbh':'richter-kaiser','zwiadowka-sp-z-o-o':'zwiadowka','golan-gear-ltd':'golan-gear','fenris-group-ab':'fenris-group','airaldi-holdings':'airaldi','summit-armament':'alps-summit','aces-eights':'aces-and-eights'};
+  const logoFor=(sec,it)=>{
+    if(sec.id!=='brands' && sec.id!=='sets') return '';
+    try{
+      const s=setLogoSlug(it[0]);
+      return BRAND_LOGOS[LOGO_ALIAS[s]||s]||'';
+    }catch(e){ return ''; }
+  };
+
   /* ---------- render ---------- */
   function card(sec,it){
     const key=sec.id+'|'+it[0], v=state[key], m=maxOf(sec,it), done=v>=m, t=T[lang()];
@@ -5950,7 +5962,9 @@ applyFilters();
     } else {
       body=`<div class="kh-row"><div class="kh-step"><button type="button" data-act="dec" data-key="${k}">−</button><input class="kh-num" type="number" min="0" max="${m}" value="${v}" data-act="set" data-key="${k}"/><span class="kh-of">/ ${m}</span><button type="button" data-act="inc" data-key="${k}">+</button></div></div><div class="kh-bar"><i style="width:${m?v/m*100:0}%"></i></div>`;
     }
-    return `<div class="kh-card ${sec.cls}${done?' done':''}"><div class="kh-top"><div class="kh-name">${esc(label(sec,it))}</div><span class="kh-badge">${t.max}</span></div>${body}</div>`;
+    const lg=logoFor(sec,it);
+    const nameHtml=lg?`<div class="kh-name has-logo"><img class="kh-logo" src="${lg}" alt="" loading="lazy" decoding="async"/><span>${esc(label(sec,it))}</span></div>`:`<div class="kh-name">${esc(label(sec,it))}</div>`;
+    return `<div class="kh-card ${sec.cls}${done?' done':''}"><div class="kh-top">${nameHtml}<span class="kh-badge">${t.max}</span></div>${body}</div>`;
   }
   function render(){
     const t=T[lang()], q=query.trim().toLowerCase();
