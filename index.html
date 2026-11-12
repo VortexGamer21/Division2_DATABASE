@@ -470,6 +470,8 @@
   .section-head.namedgear h2::before{ background: var(--yellow); }
   .section-head.namedgear .tag{ color: var(--yellow); }
   .named-gear-grid{ align-items: stretch; }
+  .named-gear-note{ margin:0 0 18px; padding:11px 14px; border:1px solid rgba(255,214,10,.3); border-left:3px solid var(--yellow); background:rgba(255,214,10,.05); font-size:12.5px; line-height:1.7; color:var(--text-dim); }
+  .named-gear-note b{ color:var(--yellow); font-weight:600; }
   .named-gear-cat-head{
     grid-column:1/-1;
     display:flex;
@@ -1899,6 +1901,7 @@ h1,h2,h3,.display{ font-weight:700; letter-spacing:.01em; }
 <div class="rule"></div>
 </div>
 <div class="wp-jump namedgear-jump" id="namedGearJump"></div>
+<div class="named-gear-note" id="namedGearNote" data-de="<b>Masken, Handschuhe, Holster und Knieschützer</b> haben ein <b>festes Attribut</b>. <b>Brustpanzer und Rucksäcke</b> haben ein <b>festes Talent</b>." data-en="<b>Masks, Gloves, Holsters and Kneepads</b> have a <b>fixed attribute</b>. <b>Chest Pieces and Backpacks</b> have a <b>fixed talent</b>."><b>Masken, Handschuhe, Holster und Knieschützer</b> haben ein <b>festes Attribut</b>. <b>Brustpanzer und Rucksäcke</b> haben ein <b>festes Talent</b>.</div>
 <div class="grid named-gear-grid" id="namedGearGrid">
 <div class="named-gear-cat-head" data-slot="Masken"><h3 data-de="Masken" data-en="Masks">Masken</h3><span class="cnt">5 Teile</span><div class="rule"></div></div>
 <article class="named-gear-card" data-name="masken yaahl gear 1-teil: +10% gefahrenschutz das hohle werk besonderheit festes benanntes attribut: +14% schaden gegen lebensenergie (health)." data-slot="Masken">
@@ -4268,6 +4271,7 @@ function applyFilters(){
   document.querySelectorAll('.section-head.namedgear')[0].style.display = visibleNamedGear ? '' : 'none';
   namedGearGrid.style.display = visibleNamedGear ? '' : 'none';
   document.getElementById('namedGearJump').style.display = (activeFilter === 'all' || activeFilter === 'namedgear') && !weaponFilterActive ? '' : 'none';
+  document.getElementById('namedGearNote').style.display = visibleNamedGear && (activeFilter === 'all' || activeFilter === 'namedgear') && !weaponFilterActive ? '' : 'none';
 
   if(weaponFilterActive){
     countNote.textContent = '';
@@ -4940,6 +4944,8 @@ applyFilters();
       if(h2) h2.textContent = english ? h2.dataset.en : h2.dataset.de;
       if(tag) tag.textContent = english ? tag.dataset.en : tag.dataset.de;
     }
+    const ngNote = document.getElementById('namedGearNote');
+    if(ngNote) ngNote.innerHTML = english ? ngNote.dataset.en : ngNote.dataset.de;
 
     const slotEN = {
       'Masken':'Masks',
