@@ -3,30 +3,6 @@
 <html lang="de">
 <head>
 <meta charset="utf-8"/>
-<script>
-/* ==========================================================
-   BESITZER-MODUS: Nur der Ressourcen-Tracker ist (alle anderen Tabs bleiben für alle sichtbar) nur sichtbar,
-   wenn dieser Browser freigeschaltet wurde. Freischalten: Seite einmal mit ?owner=on öffnen
-   (z. B. https://deine-seite.pages.dev/?owner=on). Wieder ausschalten: ?owner=off.
-   Die Freischaltung wird nur in DIESEM Browser gespeichert (localStorage).
-   Hinweis: Das ist ein Ausblenden, kein Passwortschutz. Der Code steht weiterhin im Seitenquelltext.
-   ========================================================== */
-(function(){
-  var K='division2-owner',on=false;
-  try{
-    var m=/[?&]owner=(on|off)\b/.exec(location.search);
-    if(m){if(m[1]==='on')localStorage.setItem(K,'1');else localStorage.removeItem(K);
-      if(history.replaceState)history.replaceState(null,'',location.pathname+location.hash);}
-    on=localStorage.getItem(K)==='1';
-  }catch(e){}
-  window.__OWNER=on;
-  if(!on)document.documentElement.classList.add('not-owner');
-})();
-</script>
-<style>
-  html.not-owner .main-tabs .tabs button[data-tab="res"],
-  html.not-owner #viewRes{ display:none !important; }
-</style>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>The Division 2 Database – Gear, Weapons & Builds</title>
 
@@ -1898,7 +1874,7 @@ h1,h2,h3,.display{ font-weight:700; letter-spacing:.01em; }
 <button data-tab="knowhow" role="tab" type="button">Know-how Tracker</button>
 <button data-tab="phoebe" role="tab" type="button">Phoebe-Tracker</button>
 <button data-tab="bounty" role="tab" type="button">Bounty-Tracker</button>
-<button data-tab="res" role="tab" type="button">Ressourcen-Tracker</button>
+<button data-tab="res" role="tab" type="button">Tokens and Cores Tracker</button>
 <button data-tab="exotic" role="tab" type="button">Exotic Collector</button>
 </div>
 <div class="kh-lang" role="group" aria-label="Language">
@@ -6219,7 +6195,6 @@ applyFilters();
 
   /* ---------- Tabs ---------- */
   function setTab(tab){
-    if(!window.__OWNER&&['res'].indexOf(tab)>-1)tab='db';
     document.body.classList.toggle('tab-knowhow',tab==='knowhow');
     document.body.classList.toggle('tab-phoebe',tab==='phoebe');
     document.body.classList.toggle('tab-bounty',tab==='bounty');
@@ -6512,7 +6487,7 @@ applyFilters();
 </script>
 <script>
 /* ==========================================================
-   RESSOURCEN-TRACKER (Tab): Escalation Tokens + Prototypenkerne
+   TOKENS AND CORES TRACKER (Tab): Escalation Tokens + Prototypenkerne
    Speicherung: ausschließlich localStorage, also nur in DIESEM Browser.
    Es wird nichts an einen Server gesendet, andere Besucher sehen die Werte nie.
    Sprache folgt dem DE/EN-Schalter der Seite (document.documentElement.lang).
@@ -6524,12 +6499,12 @@ applyFilters();
     {id:'core',cls:'core',de:'Prototypenkerne',   en:'Prototype Cores'}
   ];
   var TX={
-    de:{tab:'Ressourcen-Tracker',kicker:'TRACKER',t1:'Ressourcen',t2:'Tracker',
+    de:{tab:'Tokens and Cores Tracker',kicker:'TRACKER',t1:'Tokens and Cores',t2:'Tracker',
         lede:'Trage ein, wie viele Escalation Tokens und Prototypenkerne du aktuell besitzt. Mit den Buttons passt du den Wert schnell an, oder du tippst die Zahl direkt ein.',
         priv:'Nur für dich sichtbar: Die Werte liegen ausschließlich im Speicher deines Browsers und werden nirgendwohin gesendet. Andere Besucher der Seite sehen sie nicht.',
         warn:'Speichern im Browser ist nicht möglich (z. B. privater Modus). Die Werte gehen beim Neuladen verloren.',
         reset:'Beide auf 0 setzen',confirm:'Wirklich beide Werte auf 0 setzen?',minus:'verringern',plus:'erhöhen',amount:'Anzahl'},
-    en:{tab:'Resource Tracker',kicker:'TRACKER',t1:'Resource',t2:'Tracker',
+    en:{tab:'Tokens and Cores Tracker',kicker:'TRACKER',t1:'Tokens and Cores',t2:'Tracker',
         lede:'Enter how many Escalation Tokens and Prototype Cores you currently own. Use the buttons for quick changes or type the number directly.',
         priv:'Visible only to you: the values are stored in your browser only and are never sent anywhere. Other visitors of the site cannot see them.',
         warn:'Saving in the browser is not possible (e.g. private mode). Values will be lost on reload.',
