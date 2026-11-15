@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <script>
 /* ==========================================================
-   BESITZER-MODUS: Phoebe-, Bounty- und Ressourcen-Tracker sind (der Know-how-Tracker bleibt für alle sichtbar) nur sichtbar,
+   BESITZER-MODUS: Nur der Ressourcen-Tracker ist (alle anderen Tabs bleiben für alle sichtbar) nur sichtbar,
    wenn dieser Browser freigeschaltet wurde. Freischalten: Seite einmal mit ?owner=on öffnen
    (z. B. https://deine-seite.pages.dev/?owner=on). Wieder ausschalten: ?owner=off.
    Die Freischaltung wird nur in DIESEM Browser gespeichert (localStorage).
@@ -24,10 +24,8 @@
 })();
 </script>
 <style>
-  html.not-owner .main-tabs .tabs button[data-tab="phoebe"],
-  html.not-owner .main-tabs .tabs button[data-tab="bounty"],
   html.not-owner .main-tabs .tabs button[data-tab="res"],
-  html.not-owner #viewPhoebe, html.not-owner #viewBounty, html.not-owner #viewRes{ display:none !important; }
+  html.not-owner #viewRes{ display:none !important; }
 </style>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>The Division 2 Database – Gear, Weapons & Builds</title>
@@ -6221,7 +6219,7 @@ applyFilters();
 
   /* ---------- Tabs ---------- */
   function setTab(tab){
-    if(!window.__OWNER&&['phoebe','bounty','res'].indexOf(tab)>-1)tab='db';
+    if(!window.__OWNER&&['res'].indexOf(tab)>-1)tab='db';
     document.body.classList.toggle('tab-knowhow',tab==='knowhow');
     document.body.classList.toggle('tab-phoebe',tab==='phoebe');
     document.body.classList.toggle('tab-bounty',tab==='bounty');
