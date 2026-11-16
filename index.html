@@ -1666,61 +1666,6 @@
   .bt-reset:hover{ color:var(--weapon); border-color:var(--weapon-dim); background:rgba(201,67,46,.14); }
   @media (max-width:560px){ .bt-grid{ grid-template-columns:1fr; } }
 
-  /* ---------- Ressourcen-Tracker (Tab) ---------- */
-  #viewRes{ display:none; }
-  body.tab-res #viewRes{ display:block; }
-  body.tab-res #viewDb{ display:none; }
-  body.tab-res .main-tabs .kh-lang{ display:flex; }
-  .main-tabs .tabs button[data-tab="res"].active{ background: rgba(255,122,48,.14); color: var(--esc); box-shadow: 0 0 0 1px var(--esc-dim) inset; }
-  .rs-hero{ padding:40px 0 30px; border-bottom:1px solid var(--line-soft); }
-  .rs-hero .kicker{
-    display:inline-flex; align-items:center; gap:9px; font-size:11px; color:var(--gear);
-    letter-spacing:.14em; padding:7px 13px; border:1px solid var(--gear-dim);
-    border-radius:3px 3px 3px 0; background:rgba(232,137,27,.08); margin-bottom:18px;
-  }
-  .rs-hero .kicker::before{ content:''; width:6px; height:6px; background:var(--gear); border-radius:1px; transform:rotate(45deg); display:inline-block; }
-  .rs-hero h1{ font-size:clamp(30px,5vw,48px); line-height:1.05; margin:0 0 12px; color:#fff; }
-  .rs-hero h1 span{ color:var(--gear); }
-  .rs-hero p{ max-width:620px; color:var(--text-dim); font-size:13.5px; line-height:1.7; margin:0 0 18px; }
-  .rs-private{
-    display:inline-flex; align-items:flex-start; gap:10px; max-width:620px; font-size:12px; line-height:1.6; color:var(--text-dim);
-    background:var(--panel); border:1px solid var(--line-soft); border-radius:var(--radius-sm); padding:10px 14px;
-  }
-  .rs-private svg{ flex:0 0 auto; width:15px; height:15px; margin-top:2px; color:var(--brand); }
-  .rs-warn{ display:none; margin-top:12px; font-size:12px; color:var(--weapon); }
-  .rs-warn.show{ display:block; }
-  .rs-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; margin-top:34px; }
-  .rs-card{
-    --ac: var(--esc);
-    background:linear-gradient(175deg,var(--panel-2),var(--panel) 60%);
-    border:1px solid var(--line-soft); border-top:3px solid var(--ac); border-radius:var(--radius);
-    padding:22px 22px 20px; box-shadow:0 14px 26px -20px rgba(0,0,0,.7);
-  }
-  .rs-card.core{ --ac: var(--proto); }
-  .rs-name{ font-family:'Rajdhani',sans-serif; font-weight:600; font-size:20px; color:#fff; margin:0 0 4px; display:flex; align-items:center; gap:10px; }
-  .rs-name::before{ content:''; width:9px; height:9px; background:var(--ac); border-radius:2px; transform:rotate(45deg); flex:0 0 auto; }
-  .rs-val{
-    display:block; width:100%; text-align:center; background:transparent; border:0; border-bottom:1px dashed var(--line);
-    color:var(--ac); font-family:'Rajdhani',sans-serif; font-weight:600; font-size:64px; line-height:1.15; padding:8px 0 6px;
-    outline:none; margin:6px 0 16px; -moz-appearance:textfield; appearance:textfield; transition:border-color .15s ease;
-  }
-  .rs-val::-webkit-outer-spin-button,.rs-val::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
-  .rs-val:focus{ border-bottom-color:var(--ac); border-bottom-style:solid; }
-  .rs-btns{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
-  .rs-btns button{
-    appearance:none; background:var(--panel-2); color:var(--text); border:1px solid var(--line); border-radius:999px;
-    height:40px; font-family:'JetBrains Mono',monospace; font-size:13px; cursor:pointer; transition:all .15s ease;
-  }
-  .rs-btns button:hover{ border-color:var(--ac); color:var(--ac); background:rgba(255,255,255,.05); }
-  .rs-btns button:active{ transform:scale(.95); }
-  .rs-btns button:focus-visible,.rs-val:focus-visible,.rs-reset:focus-visible{ outline:2px solid var(--yellow); outline-offset:2px; }
-  .rs-foot{ margin-top:26px; }
-  .rs-reset{
-    appearance:none; background:transparent; border:1px solid var(--line); border-radius:999px; color:var(--text-dim);
-    font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.02em; padding:9px 16px; cursor:pointer; transition:all .15s ease;
-  }
-  .rs-reset:hover{ color:var(--weapon); border-color:var(--weapon-dim); background:rgba(201,67,46,.14); }
-  @media (max-width:560px){ .rs-grid{ grid-template-columns:1fr; } .rs-val{ font-size:54px; } }
 </style>
 <script>
 /* Phoebe-Tracker: Ablaufzeitpunkt zentral. Format 'JJJJ-MM-TT HH:MM' (Ortszeit), null = nie entfernen.
@@ -1874,7 +1819,6 @@ h1,h2,h3,.display{ font-weight:700; letter-spacing:.01em; }
 <button data-tab="knowhow" role="tab" type="button">Know-how Tracker</button>
 <button data-tab="phoebe" role="tab" type="button">Phoebe-Tracker</button>
 <button data-tab="bounty" role="tab" type="button">Bounty-Tracker</button>
-<button data-tab="res" role="tab" type="button">Tokens and Cores Tracker</button>
 <button data-tab="exotic" role="tab" type="button">Exotic Collector</button>
 </div>
 <div class="kh-lang" role="group" aria-label="Language">
@@ -2495,17 +2439,6 @@ h1,h2,h3,.display{ font-weight:700; letter-spacing:.01em; }
 <div class="bt-head"><h2 id="btHead"></h2><div class="rule"></div></div>
 <div class="bt-grid" id="btList"></div>
 <div class="bt-foot"><button class="bt-reset" id="btReset" type="button"></button></div>
-</div>
-<div id="viewRes">
-<header class="rs-hero">
-<div class="kicker" id="rsKicker"></div>
-<h1 id="rsTitle"></h1>
-<p id="rsLede"></p>
-<div class="rs-private"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span id="rsPrivate"></span></div>
-<div class="rs-warn" id="rsWarn"></div>
-</header>
-<div class="rs-grid" id="rsGrid"></div>
-<div class="rs-foot"><button class="rs-reset" id="rsReset" type="button"></button></div>
 </div>
 <div class="kh-toast" id="khToast"></div>
 <footer>
@@ -5095,7 +5028,7 @@ applyFilters();
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{
     acceptNode(node){
       const p=node.parentElement;
-      if(!p || p.closest('.lang-switch,.esc-section,.proto-section,#viewExotic,#viewBounty,#viewRes,#namedGearGrid,script,style')) return NodeFilter.FILTER_REJECT;
+      if(!p || p.closest('.lang-switch,.esc-section,.proto-section,#viewExotic,#viewBounty,#namedGearGrid,script,style')) return NodeFilter.FILTER_REJECT;
       if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       return NodeFilter.FILTER_ACCEPT;
     }
@@ -6198,7 +6131,6 @@ applyFilters();
     document.body.classList.toggle('tab-knowhow',tab==='knowhow');
     document.body.classList.toggle('tab-phoebe',tab==='phoebe');
     document.body.classList.toggle('tab-bounty',tab==='bounty');
-    document.body.classList.toggle('tab-res',tab==='res');
     document.body.classList.toggle('tab-exotic',tab==='exotic');
     document.querySelectorAll('.main-tabs .tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
     try{localStorage.setItem(TABKEY,tab);}catch(e){}
@@ -6213,7 +6145,7 @@ applyFilters();
   }));
   document.querySelectorAll('.lang-switch button').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{if(document.body.classList.contains('tab-knowhow'))render();},0)));
 
-  let start='db'; try{const v=localStorage.getItem(TABKEY);start=(v==='knowhow'||(v==='phoebe'&&!document.documentElement.classList.contains('ph-off'))||(v==='bounty'&&!document.documentElement.classList.contains('bt-off'))||v==='exotic'||v==='res')?v:'db';}catch(e){}
+  let start='db'; try{const v=localStorage.getItem(TABKEY);start=(v==='knowhow'||(v==='phoebe'&&!document.documentElement.classList.contains('ph-off'))||(v==='bounty'&&!document.documentElement.classList.contains('bt-off'))||v==='exotic')?v:'db';}catch(e){}
   render(); setTab(start); window.scrollTo({top:0});
 })();
 </script>
@@ -6483,92 +6415,6 @@ applyFilters();
   new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   render();
   if(!off&&!isNaN(endMs)){var iv=setInterval(function(){if(Date.now()>=endMs){clearInterval(iv);switchOff();}},1000);}
-})();
-</script>
-<script>
-/* ==========================================================
-   TOKENS AND CORES TRACKER (Tab): Escalation Tokens + Prototypenkerne
-   Speicherung: ausschließlich localStorage, also nur in DIESEM Browser.
-   Es wird nichts an einen Server gesendet, andere Besucher sehen die Werte nie.
-   Sprache folgt dem DE/EN-Schalter der Seite (document.documentElement.lang).
-   ========================================================== */
-(function(){
-  var KEY='resource-tracker-v1', MAX=9999999, storageOk=true;
-  var ITEMS=[
-    {id:'esc', cls:'esc', de:'Escalation Tokens', en:'Escalation Tokens'},
-    {id:'core',cls:'core',de:'Prototypenkerne',   en:'Prototype Cores'}
-  ];
-  var TX={
-    de:{tab:'Tokens and Cores Tracker',kicker:'TRACKER',t1:'Tokens and Cores',t2:'Tracker',
-        lede:'Trage ein, wie viele Escalation Tokens und Prototypenkerne du aktuell besitzt. Mit den Buttons passt du den Wert schnell an, oder du tippst die Zahl direkt ein.',
-        priv:'Nur für dich sichtbar: Die Werte liegen ausschließlich im Speicher deines Browsers und werden nirgendwohin gesendet. Andere Besucher der Seite sehen sie nicht.',
-        warn:'Speichern im Browser ist nicht möglich (z. B. privater Modus). Die Werte gehen beim Neuladen verloren.',
-        reset:'Beide auf 0 setzen',confirm:'Wirklich beide Werte auf 0 setzen?',minus:'verringern',plus:'erhöhen',amount:'Anzahl'},
-    en:{tab:'Tokens and Cores Tracker',kicker:'TRACKER',t1:'Tokens and Cores',t2:'Tracker',
-        lede:'Enter how many Escalation Tokens and Prototype Cores you currently own. Use the buttons for quick changes or type the number directly.',
-        priv:'Visible only to you: the values are stored in your browser only and are never sent anywhere. Other visitors of the site cannot see them.',
-        warn:'Saving in the browser is not possible (e.g. private mode). Values will be lost on reload.',
-        reset:'Set both to 0',confirm:'Really set both values to 0?',minus:'decrease',plus:'increase',amount:'Amount'}
-  };
-  var STEPS=[-10,-1,1,10];
-  var vals={esc:0,core:0}, inputs={}, names={}, btns=[];
-  var $=function(id){return document.getElementById(id)};
-  var lang=function(){return document.documentElement.lang==='en'?'en':'de'};
-  function clamp(v){v=parseInt(v,10);return isNaN(v)||v<0?0:Math.min(MAX,v)}
-
-  function load(){
-    try{
-      var raw=localStorage.getItem(KEY);
-      if(raw){var p=JSON.parse(raw);ITEMS.forEach(function(it){vals[it.id]=clamp(p&&p[it.id])})}
-    }catch(e){storageOk=false}
-  }
-  function save(){
-    try{localStorage.setItem(KEY,JSON.stringify(vals))}catch(e){storageOk=false;$('rsWarn').classList.add('show')}
-  }
-
-  function build(){
-    var grid=$('rsGrid');grid.innerHTML='';
-    ITEMS.forEach(function(it){
-      var c=document.createElement('div');c.className='rs-card '+it.cls;
-      var h=document.createElement('h3');h.className='rs-name';names[it.id]=h;c.appendChild(h);
-      var i=document.createElement('input');i.className='rs-val';i.type='number';i.min='0';i.max=MAX;i.inputMode='numeric';i.value=vals[it.id];
-      i.onchange=function(){vals[it.id]=clamp(i.value);i.value=vals[it.id];save()};
-      inputs[it.id]=i;c.appendChild(i);
-      var row=document.createElement('div');row.className='rs-btns';
-      STEPS.forEach(function(s){
-        var b=document.createElement('button');b.type='button';b.textContent=(s>0?'+':'\u2212')+Math.abs(s);
-        b.onclick=function(){vals[it.id]=clamp(vals[it.id]+s);i.value=vals[it.id];save()};
-        btns.push({el:b,it:it,s:s});row.appendChild(b);
-      });
-      c.appendChild(row);grid.appendChild(c);
-    });
-  }
-
-  function texts(){
-    var L=lang(),T=TX[L];
-    $('rsKicker').textContent=T.kicker;
-    $('rsTitle').innerHTML=T.t1+' <span>'+T.t2+'</span>';
-    $('rsLede').textContent=T.lede;
-    $('rsPrivate').textContent=T.priv;
-    $('rsWarn').textContent=T.warn;
-    $('rsReset').textContent=T.reset;
-    ITEMS.forEach(function(it){names[it.id].textContent=it[L];inputs[it.id].setAttribute('aria-label',it[L]+' \u2013 '+T.amount)});
-    btns.forEach(function(o){o.el.setAttribute('aria-label',o.it[L]+' '+(o.s>0?T.plus:T.minus)+' '+Math.abs(o.s))});
-    var tb=document.querySelector('.main-tabs .tabs button[data-tab="res"]');if(tb)tb.textContent=T.tab;
-    document.querySelectorAll('.kh-lang button').forEach(function(b){b.classList.toggle('active',b.dataset.l===L)});
-  }
-
-  $('rsReset').onclick=function(){
-    if(confirm(TX[lang()].confirm)){ITEMS.forEach(function(it){vals[it.id]=0;inputs[it.id].value=0});save()}
-  };
-  /* Änderungen aus einem anderen Browser-Tab übernehmen */
-  window.addEventListener('storage',function(e){
-    if(e.key!==KEY)return;load();ITEMS.forEach(function(it){inputs[it.id].value=vals[it.id]});
-  });
-  new MutationObserver(texts).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
-
-  load();build();texts();
-  if(!storageOk)$('rsWarn').classList.add('show');
 })();
 </script>
 </body>
