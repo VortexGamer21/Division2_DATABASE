@@ -3003,7 +3003,7 @@ const weaponCategories = [
   { id:"mmr", name:"Scharfschützengewehre (MMR)", groups:{
     exotic: [["Prima Donna","exotic","S"],["Shroud","exotic","A"],["Nemesis","exotic","A"],["Mantis","exotic","A"],["Dread Edict","exotic","B"],["Sacrum Imperium","exotic","B"]],
     named: [["The White Death","named","B"],["Designated Hitter","named","C"],["Relic","named",""],["Handbasket","named",""],["Ekim's Long stick","named",""],["The Darkness","named",""],["Brutus","named",""],["Incendia","named",""],["Pinprick","named",""],["Scalpel","named",""],["Oh Carol","named",""],["Instigator","named",""],["Adrestia","named",""],["Commando","named",""]],
-    standard: [["Model 700","standard","S"],["M44","standard","A"],["M700","standard","A"],["Tactical .308","standard","B"],["G28","standard",""],["SOCOM Mk20 SSR","standard",""],["M700 Tactical","standard",""],["Covert SRS","standard",""],["Classic M44 Carbine","standard",""],["Custom M44","standard",""],["Hunting M44","standard",""],["SR-1","standard",""],["Surplus SVD","standard",""]]
+    standard: [["Model 700","standard","S"],["M44","standard","A"],["M700","standard","A"],["Tactical .308","standard","B"],["G28","standard",""],["SOCOM Mk20 SSR","standard",""],["M700 Tactical","standard",""],["Covert SRS","standard",""],["Classic M44 Carbine","standard",""],["Custom M44","standard",""],["Hunting M44","standard",""],["SR-1","standard",""],["Surplus SVD","standard",""],["Blizzard","standard",""]]
   }},
   { id:"rifle", name:"Gewehre (Rifles)", groups:{
     exotic: [["The Ravenous","exotic","A"],["Diamondback","exotic","A"],["Doctor Home","exotic","B"],["Vindicator","exotic","C"],["Merciless","exotic","C"],["Bittersweet","exotic","C"],["Steel & Sons ACR","exotic",""],["Ruthless","exotic",""]],
@@ -3252,6 +3252,7 @@ const weaponStats = {
   "Brutus": {dmg:412516, rpm:55, mag:7, reload:3.98, range:50, magDmg:2887612, burst:378140, sustain:248581},
   "Incendia": {dmg:409357, rpm:60, mag:7, reload:4.29, range:60, magDmg:2865499, burst:409357, sustain:253809},
   "Pinprick": {dmg:409357, rpm:60, mag:7, reload:4.29, range:60, magDmg:2865499, burst:409357, sustain:253809},
+  "Blizzard": {dmg:409357, rpm:60, mag:7, reload:4.29, range:60, magDmg:2865499, burst:409357, sustain:253809},
   "Scalpel": {dmg:403810, rpm:70, mag:7, reload:3.04, range:50, magDmg:2826670, burst:471112, sustain:312685},
   "Oh Carol": {dmg:433563, rpm:55, mag:5, reload:4.29, range:50, magDmg:2167815, burst:397433, sustain:222464},
   "Instigator": {dmg:417692, rpm:55, mag:5, reload:4.29, range:50, magDmg:2088460, burst:382884, sustain:214321},
@@ -6566,7 +6567,7 @@ applyFilters();
   /* type 'cnt' = x/y Zähler (Name EN, Name DE, [ungenutzt], Maximum) | type 'lvl' = Stufe 0–10. Alle Startwerte sind 0. */
   const KH_DATA=[
     {id:'weapons', cls:'weapon', type:'cnt', de:'Waffen', en:'Weapons', items:[
-      ['Rifles','Gewehre',18,40],['Assault Rifles','Sturmgewehre',8,59],['Marksman Rifles','Scharfschützengewehre',17,34],
+      ['Rifles','Gewehre',18,40],['Assault Rifles','Sturmgewehre',8,59],['Marksman Rifles','Scharfschützengewehre',17,35],
       ['Shotguns','Schrotflinten',12,34],['SMGs','MPs',15,46],['LMGs','MGs',23,39],
       ['Pistols','Pistolen',6,34],['Specialization','Spezialisierung',2,6]]},
     {id:'gear', cls:'named', type:'cnt', de:'Named & Exotic Gear', en:'Named & Exotic Gear', items:[
