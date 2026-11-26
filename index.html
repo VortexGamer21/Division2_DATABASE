@@ -1124,6 +1124,29 @@
 .schem-table td.cnt{ color: var(--text-dim); text-align:right; width:56px; font-variant-numeric: tabular-nums; }
 @media (max-width:640px){ .schem-chip{ margin-left:0; } }
 
+/* ---------- Schematics: Übersicht im Grafik-Layout ---------- */
+.ov-grid{ display:grid; grid-template-columns: 2fr 1fr 1fr; gap:22px; align-items:start; }
+.ov-col{ min-width:0; }
+.ov-sub{ display:grid; grid-template-columns:1fr 1fr; gap:0 22px; }
+.ov-head{ display:flex; align-items:center; gap:12px; padding:0 0 12px; margin-bottom:12px; border-bottom:1px solid var(--line); color:#fff; font-weight:600; font-size:14px; line-height:1.25; }
+.ov-head svg{ width:34px; height:34px; flex:0 0 auto; color: var(--schem); }
+.ov-head small{ display:block; font-weight:600; font-size:14px; color:#fff; }
+.ov-head.sp{ margin-top:26px; }
+.ov-list{ border-left:2px solid var(--schem-dim); padding-left:14px; display:flex; flex-direction:column; gap:12px; }
+.ov-card h4{ margin:0 0 3px; font-size:13px; font-weight:600; color: var(--schem); letter-spacing:.01em; }
+.ov-card h4 em{ font-style:normal; font-weight:400; color: var(--text-dim); font-size:11.5px; }
+.ov-card ul{ list-style:none; margin:0; padding:0; }
+.ov-card li{ display:flex; align-items:flex-start; gap:7px; font-size:12.5px; line-height:1.45; color: var(--text); padding:1px 0; }
+.ov-card li b{ color:#fff; font-weight:600; font-variant-numeric:tabular-nums; }
+.ov-ic{ width:15px; height:15px; flex:0 0 auto; margin-top:2px; }
+.ov-ic.D{ color: var(--up); } .ov-ic.R{ color: var(--schem); } .ov-ic.V{ color:#7CB8FF; }
+.ov-legend{ margin-top:26px; border:1px solid var(--schem-dim); border-radius: var(--radius); padding:12px 16px; display:flex; flex-direction:column; gap:8px; background: rgba(255,194,71,0.04); }
+.ov-legend div{ display:flex; align-items:center; gap:10px; font-size:12.5px; color:#fff; }
+.ov-legend .ov-ic{ width:18px; height:18px; margin:0; }
+.ov-foot{ margin:22px 0 0; font-size:11.5px; color: var(--text-dim); line-height:1.55; max-width:760px; }
+@media (max-width:1100px){ .ov-grid{ grid-template-columns:1fr 1fr; } .ov-col.w{ grid-column:1 / -1; } }
+@media (max-width:640px){ .ov-grid{ grid-template-columns:1fr; } .ov-sub{ grid-template-columns:1fr; } }
+
 .esc-section{ scroll-margin-top: 92px; }
 .esc-section[hidden]{ display:none; }
 
@@ -5992,7 +6015,7 @@ applyFilters();
   const sec = document.getElementById('schemSection');
   if(!sec) return;
 
-  let cur='weapon';
+  let cur='overview';
   const A='add', R='rep', I='inc';
   /* [Name, Gilt für, [[Modus, Stat, PvE, PvP], ...]] */
   const STATS = {
@@ -6063,6 +6086,109 @@ applyFilters();
     ]
   };
 
+
+  /* ===== Übersicht im Grafik-Layout (Reihenfolge wie in der Original-Grafik) =====
+     Icon-Typ: D = Schematic Attribute, R = Replacing Attribute, V = Relative Value Replacement */
+  const OV = {
+    weapon:[
+      ['Affliction',[['D','9%','Status Effect'],['D','9%','Skill Efficiency']]],
+      ['Birder',[['R','7.2%','Critical Hit Chance']]],
+      ['Bountiful Assault',[['D','10.5%','Assault Rifle Damage'],['R','14%','Magazine Size']]],
+      ['Bountiful Breach',[['D','10.5%','Shotgun Damage'],['R','14%','Magazine Size']]],
+      ['Braincase',[['D','18%','Headshot Damage']]],
+      ['Brave Draw',[['D','8%','Protection from Elites'],['D','9%','Headshot Damage']]],
+      ['Buzzsaw',[['D','10.5%','Swap Speed'],['R','27%','Status Effects']]],
+      ['Castigation',[['D','5%','Damage to Armor'],['R','15%','Damage to Target out of Cover'],['V','100%','Relative Value Replacement']]],
+      ['Cornucopia',[['D','5%','Rate of Fire'],['R','11%','Magazine Size']]],
+      ['Defiance',[['D','8%','Protection from Elites'],['R','36%','Hazard Protection'],['V','100%','Relative Value Replacement']]],
+      ['Elegance',[['D','8%','Weapon Handling'],['D','11%','Magazine Size']]],
+      ['Exposure',[['D','6.8%','Damage to Targets out of Cover']]],
+      ['Furious Precision',[['D','11%','Accuracy'],['D','5%','Rate of Fire']]],
+      ['Hazmat Rush',[['D','5%','Rate of Fire'],['D','9%','Hazard Protection']]],
+      ['Healthy Suppression',[['D','4,163%','Armor Regen'],['D','9%','Hazard Protection']]],
+      ['Knightfall',[['D','3.8%','Damage to Armor'],['V','85%','Relative Value Replacement']]],
+      ['Precise Sting',[['D','11%','Accuracy'],['D','11%','Stability']]],
+      ['Prickly Sting',[['D','10.5%','Rifle Damage'],['R','11.3%','Headshot Damage']]],
+      ['Reaching Breach',[['D','11%','Reload Speed'],['D','28%','Optimal Range']]],
+      ['Reliant',[['R','11.3%','Critical Hit Damage'],['V','85%','Relative Value Replacement']]],
+      ['Rifleman',[['D','6.8%','Critical Hit Damage']]],
+      ['Rocksteady',[['V','75%','Stabilize'],['V','75%','Stabilize']]],
+      ['Snipe Hunt',[['R','7.5%','Critical Hit Damage']]],
+      ['Spitfire',[['D','2.5%','Rate of Fire']]],
+      ['Steady Precision',[['D','10.5%','Marksman Rifle Damage'],['R','13.5%','Stability']]],
+      ['Swift Assault',[['D','14%','Swap Speed'],['D','9%','Skill Haste']]],
+      ['Swift Suppression',[['D','10.5%','LMG Damage'],['R','13.5%','Reload Speed']]],
+      ['Tilt',[['R','10.8%','Critical Hit Chance'],['V','85%','Relative Value Replacement']]],
+      ['Vampire Draw',[['D','10.5%','Pistol Damage'],['R','21,302','Armor on Kill']]],
+      ['Violent Rush',[['D','10.5%','SMG Damage'],['R','11.3%','Critical Hit Damage']]]
+    ],
+    gearset:[
+      ['Backup',[['D','7%','Skill Repair'],['R','5%','Skill Efficiency'],['V','100%','Relative Value Replacement']]],
+      ['Blackjack',[['D','2.6%','Critical Hit Damage']]],
+      ['Blight Ward',[['D','38,250','Armor'],['R','11.3%','Hazard Protection']],'Mask'],
+      ['Blue Collar',[['R','3%','Protection from Elites'],['V','85%','Relative Value Replacement']]],
+      ['Boxcars',[['R','4.5%','Critical Hit Chance']]],
+      ['Deep Pockets',[['D','38,250','Armor'],['R','6%','Magazine Size']],'Backpack'],
+      ['Last Bastion',[['D','38,250','Armor'],['R','9.4%','Incoming Repairs']],'Chest'],
+      ['Margins',[['R','3.8%','Skill Efficiency'],['V','85%','Relative Value Replacement']]],
+      ['Nimble',[['R','12%','Weapon Handling'],['R','15%','Headshot Damage']]],
+      ['Payout',[['R','9%','Critical Hit Damage']]],
+      ['Ready Response',[['D','38,250','Armor'],['R','6.8%','Swap Speed']],'Holster'],
+      ['Steady Grip',[['D','38,250','Armor'],['R','9%','Weapon Handling']],'Gloves'],
+      ['Supercharge',[['D','3.5%','Skill Damage']]],
+      ['Tuner',[['D','38,250','Armor'],['R','8%','Augment Efficiency']],'Kneepads'],
+      ['Vigor',[['D','4,260','Health']]],
+      ['Vouchsafe',[['R','7.5%','Hazard Protection']]]
+    ],
+    brandset:[
+      ['Blast Shield',[['D','2.6%','Explosive Resistance']]],
+      ['Harvester',[['D','5,680','Armor on Kill'],['R','12.5%','Incoming Repairs'],['V','100%','Relative Value Replacement']]],
+      ['Jackpot',[['R','13.5%','Critical Hit Damage'],['R','6.8%','Critical Hit Chance']]],
+      ['Optimizer',[['D','3.5%','Critical Hit Damage'],['D','3.5%','Augment Efficiency']]],
+      ['Patch Job',[['R','15%','Skill Repair']]],
+      ['Safeguard',[['D','3.5%','Hazard Protection'],['V','100%','Relative Value Replacement']]],
+      ['Shelter',[['R','7.5%','Hazard Protection']]],
+      ['Tribulation',[['D','2.6%','Status Effects']]],
+      ['Working Class',[['R','4%','Protection from Elites'],['R','15%','Hazard Protection']]]
+    ],
+    generic:[
+      ['Apogee',[['V','85%','Relative Value Replacement'],['V','85%','Relative Value Replacement'],['V','85%','Relative Value Replacement']]],
+      ['Mechanism',[['V','100%','Relative Value Replacement'],['V','100%','Relative Value Replacement']]]
+    ]
+  };
+  const OV_DE = {
+    'Status Effect':'Statuseffekt','Status Effects':'Statuseffekte','Skill Efficiency':'Skill-Effizienz','Critical Hit Chance':'Krit-Chance','Critical Hit Damage':'Krit-Schaden',
+    'Assault Rifle Damage':'Sturmgewehr-Schaden','Shotgun Damage':'Schrotflinten-Schaden','Rifle Damage':'Gewehr-Schaden','Marksman Rifle Damage':'Scharfschützengewehr-Schaden',
+    'LMG Damage':'LMG-Schaden','SMG Damage':'SMG-Schaden','Pistol Damage':'Pistolenschaden','Magazine Size':'Magazingröße','Headshot Damage':'Kopfschuss-Schaden',
+    'Protection from Elites':'Schutz vor Elite-Gegnern','Swap Speed':'Wechselgeschwindigkeit','Damage to Armor':'Schaden gegen Rüstung',
+    'Damage to Target out of Cover':'Schaden gegen Ziele außerhalb der Deckung','Damage to Targets out of Cover':'Schaden gegen Ziele außerhalb der Deckung',
+    'Relative Value Replacement':'Relativer Wertersatz','Rate of Fire':'Feuerrate','Hazard Protection':'Gefahrenschutz','Weapon Handling':'Waffenhandhabung',
+    'Accuracy':'Genauigkeit','Armor Regen':'Rüstungsregeneration','Stability':'Stabilität','Reload Speed':'Nachladegeschwindigkeit','Optimal Range':'Optimale Reichweite',
+    'Skill Haste':'Fertigkeitsbeschleunigung','Armor on Kill':'Rüstung bei Kill','Skill Repair':'Skill-Reparatur','Armor':'Rüstung','Incoming Repairs':'Eingehende Reparaturen',
+    'Augment Efficiency':'Augment-Effizienz','Skill Damage':'Skill-Schaden','Health':'Gesundheit','Explosive Resistance':'Explosionsresistenz'
+  };
+  const OV_SLOT = {
+    de:{Mask:'nur Masken',Backpack:'nur Rucksäcke',Chest:'nur Brustpanzer',Holster:'nur Holster',Gloves:'nur Handschuhe',Kneepads:'nur Knieschützer'},
+    en:{Mask:'Masks only',Backpack:'Backpack only',Chest:'Chest only',Holster:'Holsters only',Gloves:'Gloves only',Kneepads:'Knees only'}
+  };
+  const OV_T = {
+    de:{ weapon:['Waffen','Attribut-Schematics'], gearset:['Gearset','Attribut-Schematics'], brandset:['Brandset','Attribut-Schematics'], generic:['Generische','Attribut-Schematics'],
+         D:'Schematic-Attribut', R:'Ersetzendes Attribut', V:'Relativer Wertersatz',
+         foot:'Prototype-Schematics geben dir neue Wege, deine Prototype-Items anzupassen, und ersetzen die normale Rekalibrierung und Optimierung. Jedes Schematic bietet ein bestimmtes Änderungspaket – such dir eines aus, das zu deinem Build passt, prüfe, mit welchen Items es funktioniert, und wähle, wo du seine Effekte anwendest.' },
+    en:{ weapon:['Weapon','Attribute Schematics'], gearset:['Gearset','Attribute Schematics'], brandset:['Brandset','Attribute Schematics'], generic:['Generic','Attribute Schematics'],
+         D:'Schematic Attribute', R:'Replacing Attribute', V:'Relative Value Replacement',
+         foot:'Prototype Schematics give you new ways to customize your Prototype items, taking the place of standard Recalibration and Optimization. Each Schematic offers a specific package of changes. Find one that suits your build, check which items it works with, and choose where to apply its effects.' }
+  };
+  const SVG = {
+    D:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11M7.5 9.5 12 14l4.5-4.5M4 16v4.5h16V16"/></svg>',
+    R:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H8M11.5 3.5 8 7l3.5 3.5M4 17h12M12.5 13.5 16 17l-3.5 3.5"/></svg>',
+    V:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5H9M12 1.5 8.5 5 12 8.5M4 12h11M11.5 8.5 15 12l-3.5 3.5M4 20.5h16"/></svg>',
+    weapon:'<svg viewBox="0 0 32 32" fill="currentColor"><path d="M3 9h21l2 3h3v4h-4l-1 2h-5l-1 8h-6l1-8h-3l-1 3H7zM8 12v3h14v-3z" fill-rule="evenodd"/></svg>',
+    gearset:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M16 2 27 8v12L16 30 5 20V8z"/><path d="M11 12h10v6l-5 5-5-5z" fill="currentColor" stroke="none"/></svg>',
+    brandset:'<svg viewBox="0 0 32 32" fill="currentColor"><path d="M10 3h4l2 3 2-3h4l5 5-3 4-3-1v17H11V11l-3 1-3-4z"/></svg>',
+    generic:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><path d="M16 2 30 16 16 30 2 16z"/><path d="M16 9v7M12 13l4 4 4-4M11 21h10"/></svg>'
+  };
+
   /* Talente: [Typ-Key, [Talente]] — überall PvE: Ja / PvP: Ja */
   const TALENTS = {
     weapon:[
@@ -6098,7 +6224,7 @@ applyFilters();
     de:{ title:'Prototyp-Schematics', tag:'PvE → PvP // SEASON 4', chip:'Prototype Gear',
       sub:'Die Prototype-Schematics im Überblick: Stat-Werte im PvE im Vergleich zu den neuen PvP-Werten (Season 4 PTS) sowie die verfügbaren Talente. Ein PvP-Wert von 0.0 % bedeutet, dass der Bonus im PvP nicht wirkt.',
       lUp:'PvP höher als PvE', lDown:'PvP niedriger als PvE', lZero:'kein Bonus im PvP',
-      jump:{weapon:'Waffen', gearset:'Gearset', brandset:'Brandset', other:'Allgemein', talW:'Waffen-Talente', talB:'Brandset-Talente'},
+      jump:{overview:'Übersicht', weapon:'Waffen', gearset:'Gearset', brandset:'Brandset', other:'Allgemein', talW:'Waffen-Talente', talB:'Brandset-Talente'},
       weapon:'Waffen-Schematics (Stats)', gearset:'Gearset-Schematics (Stats)', brandset:'Brandset-Schematics (Stats)', other:'Allgemeine Schematics (Stats)',
       talW:'Waffen-Talente', talB:'Brandset-Talente',
       cols:['Schematic','Gilt für','Slot','Aktion','Attribut','PvE','PvP'],
@@ -6108,7 +6234,7 @@ applyFilters();
     en:{ title:'Prototype Schematics', tag:'PvE → PvP // SEASON 4', chip:'Prototype Gear',
       sub:'Overview of the Prototype Schematics: stat values in PvE compared with the new PvP values (Season 4 PTS), plus the available talents. A PvP value of 0.0% means the bonus does not apply in PvP.',
       lUp:'PvP higher than PvE', lDown:'PvP lower than PvE', lZero:'no bonus in PvP',
-      jump:{weapon:'Weapons', gearset:'Gearset', brandset:'Brandset', other:'General', talW:'Weapon Talents', talB:'Brandset Talents'},
+      jump:{overview:'Overview', weapon:'Weapons', gearset:'Gearset', brandset:'Brandset', other:'General', talW:'Weapon Talents', talB:'Brandset Talents'},
       weapon:'Weapon Schematics (Stats)', gearset:'Gearset Schematics (Stats)', brandset:'Brandset Schematics (Stats)', other:'General Schematics (Stats)',
       talW:'Weapon Talents', talB:'Brandset Talents',
       cols:['Schematic','Applies to','Slot','Action','Attribute','PvE','PvP'],
@@ -6166,6 +6292,28 @@ applyFilters();
       return `<div class="proto-wrap"><table class="schem-table">${head}<tbody>${body}</tbody></table></div>`;
     };
 
+
+    const ovLab = (k) => lang === 'en' ? k : (OV_DE[k] || k);
+    const ovHay = (name, items) => (name + ' ' + items.map(i => i[2] + ' ' + (OV_DE[i[2]]||'')).join(' ')).toLowerCase();
+    const ovCard = e => {
+      const slot = e[2] ? ` <em>(${esc(OV_SLOT[lang][e[2]])})</em>` : '';
+      const lis = e[1].map(i => `<li><span class="ov-ic ${i[0]}" title="${esc(OV_T[lang][i[0]])}">${SVG[i[0]]}</span><span><b>${esc(i[1])}</b> ${esc(ovLab(i[2]))}</span></li>`).join('');
+      return `<div class="ov-card"><h4>${esc(e[0])}${slot}</h4><ul>${lis}</ul></div>`;
+    };
+    const ovList = list => '<div class="ov-list">' + list.filter(e => !q || ovHay(e[0], e[1]).includes(q)).map(ovCard).join('') + '</div>';
+    const ovHead = (k, extra) => `<div class="ov-head${extra||''}">${SVG[k]}<span>${OV_T[lang][k][0]}<small>${OV_T[lang][k][1]}</small></span></div>`;
+    const overview = () => {
+      const w = OV.weapon.filter(e => !q || ovHay(e[0], e[1]).includes(q));
+      const half = Math.ceil(w.length / 2);
+      const gen = OV.generic.filter(e => !q || ovHay(e[0], e[1]).includes(q));
+      return `<div class="ov-grid">
+        <div class="ov-col w">${ovHead('weapon')}<div class="ov-sub"><div class="ov-list">${w.slice(0, half).map(ovCard).join('')}</div><div class="ov-list">${w.slice(half).map(ovCard).join('')}</div></div></div>
+        <div class="ov-col">${ovHead('gearset')}${ovList(OV.gearset)}</div>
+        <div class="ov-col">${ovHead('brandset')}${ovList(OV.brandset)}${ovHead('generic',' sp')}<div class="ov-list">${gen.map(ovCard).join('')}</div>
+          <div class="ov-legend">${['D','R','V'].map(k => `<div><span class="ov-ic ${k}">${SVG[k]}</span>${OV_T[lang][k]}</div>`).join('')}</div></div>
+      </div><p class="ov-foot">${OV_T[lang].foot}</p>`;
+    };
+
     const block = (id, title, inner) => `<div class="schem-block" id="schem-${id}"${id===cur?'':' style="display:none"'}><div class="section-head schem"><h2>${title}</h2><div class="rule"></div></div>${inner}</div>`;
 
     sec.innerHTML = `
@@ -6176,7 +6324,8 @@ applyFilters();
       <div class="schem-legend">
         <span><b class="up">▲</b> ${t.lUp}</span><span><b class="down">▼</b> ${t.lDown}</span><span><b style="color:var(--text-dim)">0.0%</b> ${t.lZero}</span>
       </div>
-      <div class="schem-jump">${['weapon','gearset','brandset','other','talW','talB'].map(k => `<button type="button" data-j="${k}" class="${k===cur?'active':''}">${t.jump[k]}</button>`).join('')}</div>
+      <div class="schem-jump">${['overview','weapon','gearset','brandset','other','talW','talB'].map(k => `<button type="button" data-j="${k}" class="${k===cur?'active':''}">${t.jump[k]}</button>`).join('')}</div>
+      ${block('overview', lang==='en'?'Schematics Overview':'Schematics-Übersicht', overview())}
       ${block('weapon', t.weapon, statTable(STATS.weapon))}
       ${block('gearset', t.gearset, statTable(STATS.gearset))}
       ${block('brandset', t.brandset, statTable(STATS.brandset))}
