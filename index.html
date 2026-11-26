@@ -1337,6 +1337,9 @@
 .esc-table .dep{ color:var(--text-dim); }
 .esc-table .rew{ color:var(--gold); font-weight:600; }
 .esc-table .grp{ color:var(--text); }
+.esc-drop-title{ margin-top:22px; }
+.esc-drop-table th{ padding-top:6px; }
+.esc-drop-table td .hb{ min-width:64px; }
 .hb{
   position:relative;
   padding:4px 9px;
@@ -5481,6 +5484,29 @@ applyFilters();
     [3, 5, 170, 350, 350, '5',   5],
     [4, 5, 240, 550, 550, '7-8', 7]
   ];
+  /* Zusätzliche Belohnungen je Tier: [Field Recon Data, SHD Calibration, Exotic Components] (Prototype Credits = Tokens oben) */
+  const REWARDS = {
+    1: [0, 0, 0],
+    2: [7, 2, 0],
+    3: [10, 4, 2],
+    4: [10, 5, 4]
+  };
+  /* Prototyp-Drop-Chancen: [Grade, Player Rating, Tier 1, Tier 2, Tier 3, Tier 4] (null = nicht verfügbar) */
+  const DROPS = [
+    ['I',   0,    4.50,  7.50,  9.50, 12.00],
+    ['I',   100,  4.74,  7.90, 10.00, 12.60],
+    ['I',   200,  5.46,  9.10, 11.50, 14.40],
+    ['II',  300,  6.66, 11.10, 14.00, 17.40],
+    ['II',  400,  8.34, 13.90, 17.50, 21.60],
+    ['II',  500, 10.50, 17.50, 22.00, 27.00],
+    ['III', 550, 11.76, 19.60, 24.62, 30.15],
+    ['III', 600, null, 21.90, 27.50, 33.60],
+    ['III', 700, null, 27.10, 34.00, 41.40],
+    ['IV',  800, null, 33.10, 41.50, 50.40],
+    ['IV',  900, null, null,  50.00, 60.60],
+    ['V',  1000, null, null,  59.50, 72.00]
+  ];
+  const MAXDROP = 72;
   const MAXPCT = 800;
   /* Max.-Player-Rating-Icons: Tier 1 = Schlange III, Tier 2 = Adler IV, Tier 3+4 = Wolf V */
   const RATING_ICON = {
@@ -5496,6 +5522,7 @@ applyFilters();
   const TXT = {
     de:{
       tag:'KOSTEN / SKALIERUNG',
+      dropTitle:'Prototyp-Drop-Chancen',
       sub:'Kosten/Belohnungen und Schwierigkeitsskalierung je Tier — Werte laut Escalation-Grafik.',
       from:'ab Tier',
       hint:'Player Rating und Gegnerwerte im Überblick.',
@@ -5504,6 +5531,7 @@ applyFilters();
     },
     en:{
       tag:'COST / SCALING',
+      dropTitle:'Prototype Drop Chances',
       sub:'Cost/reward and difficulty scaling per tier — values as shown in the Escalation graphic.',
       from:'from Tier',
       hint:'Overview of Player Rating and enemy values.',
@@ -5674,7 +5702,22 @@ applyFilters();
         <td>${bar(hp)}</td>
         <td>${bar(arm)}</td>
         <td>${oldTier}</td>
-        <td>${tokens}</td>
+        <td class="rew">${tokens}</td>
+        <td>${REWARDS[tier][0]}</td>
+        <td>${REWARDS[tier][1]}</td>
+        <td>${REWARDS[tier][2]}</td>
+      </tr>`;
+    }).join('');
+
+    const fmtPct = v => (lang === 'de' ? v.toFixed(2).replace('.', ',') : v.toFixed(2)) + '%';
+    const dropRows = DROPS.map(r => {
+      const [grade, rating, ...ch] = r;
+      return `<tr>
+        <td class="tier">${grade}</td>
+        <td>${rating}</td>
+        ${ch.map(v => v == null
+          ? `<td><div class="hb none">–</div></td>`
+          : `<td><div class="hb drop" style="--p:${(v / MAXDROP).toFixed(4)}">${fmtPct(v)}</div></td>`).join('')}
       </tr>`;
     }).join('');
 
@@ -5707,10 +5750,30 @@ applyFilters();
                   <th><span style="display:block;height:26px"></span>Enemy<br>Health</th>
                   <th><span style="display:block;height:26px"></span>Enemy<br>Armor</th>
                   <th><span style="display:block;height:26px"></span>Old<br>Tier</th>
-                  <th><span style="display:block;height:26px"></span>Tokens</th>
+                  <th><span style="display:block;height:26px"></span>Prototype<br>Credits</th>
+                  <th><span style="display:block;height:26px"></span>Field Recon<br>Data</th>
+                  <th><span style="display:block;height:26px"></span>SHD<br>Calibration</th>
+                  <th><span style="display:block;height:26px"></span>Exotic<br>Components</th>
                 </tr>
               </thead>
               <tbody>${rows}</tbody>
+            </table>
+          </div>
+
+          <h4 class="esc-col-title esc-drop-title">${t.dropTitle}</h4>
+          <div class="esc-tablewrap">
+            <table class="esc-table esc-drop-table">
+              <thead>
+                <tr>
+                  <th>Player<br>Grade</th>
+                  <th>Player<br>Rating</th>
+                  <th>Tier 1</th>
+                  <th>Tier 2</th>
+                  <th>Tier 3</th>
+                  <th>Tier 4</th>
+                </tr>
+              </thead>
+              <tbody>${dropRows}</tbody>
             </table>
           </div>
           <p class="esc-note">${t.hint}<br>${t.note}</p>
